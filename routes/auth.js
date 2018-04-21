@@ -2,38 +2,39 @@ const express = require("express");
 const passport = require('passport');
 const User = require("../models/User");
 const authRoutes = express.Router();
+const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
+const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-authRoutes.get("/login", (req, res, next) => {
+authRoutes.get("/login", ensureLoggedOut(), (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
 authRoutes.post("/login", passport.authenticate("local", {
   successRedirect: "/",
-  failureRedirect: "/login",
+  failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
 }));
 
-authRoutes.get("/signup", (req, res, next) => {
+authRoutes.get("/signup", ensureLoggedOut(), (req, res, next) => {
   res.render("auth/signup");
 });
 
 authRoutes.post("/signup", (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
-  const rol = req.body.role;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+  if (email === "" || password === "") {
+    res.render("auth/signup", { message: "Indicate email and password" });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", { message: "The email already exists" });
       return;
     }
 
@@ -41,13 +42,13 @@ authRoutes.post("/signup", (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
-      username,
-      password: hashPass,
-      role:"teacher"
+      email,
+      password: hashPass
     });
 
     newUser.save((err) => {
       if (err) {
+        console.log(err);
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
         res.redirect("/");
@@ -56,7 +57,7 @@ authRoutes.post("/signup", (req, res, next) => {
   });
 });
 
-authRoutes.get("/logout", (req, res) => {
+authRoutes.get("/logout", ensureLoggedIn(), (req, res) => {
   req.logout();
   res.redirect("/");
 });

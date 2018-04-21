@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    fullName: { type: String, required: true },
-    username: { type: String, required: true },
+    fullName: String,
+    username: String,
     email: { type: String, required: true },
     password: { type: String, required: true },
-    profileImg: { type: Object, required: true },
+    imgName: String,
+    imgPath: String,
     bootcamp: {type: String, enum: ['Web', 'UX']}
   },
   {
