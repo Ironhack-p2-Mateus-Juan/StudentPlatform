@@ -21,6 +21,39 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        {{#unless userData.userId}}
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/signup">Sign Up</a>
+        </li>
+        {{/unless}}
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/show">View Posts</a>
+        </li>
+        {{#if userData.userId}}
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/profile">Access Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="posts/new">Create New Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>
+
+
   {{{body}}}
   <script src='/javascripts/script.js'></script>
 </body>
