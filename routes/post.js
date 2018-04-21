@@ -72,7 +72,17 @@ postRoute.post("/edit/:id", (req, res, next) => {
       res.redirect("/post");
     })
     .catch(err => {
-        res.render("error", err);
+      res.render("error", err);
+    });
+});
+
+postRoute.get("/delete/:id", (req, res, next) => {
+  Post.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.redirect("/post/edit");
+    })
+    .catch(err => {
+      res.render("error", err);
     });
 });
 
