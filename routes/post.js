@@ -1,9 +1,25 @@
 const express = require('express');
-const router  = express.Router();
+const Post = require('../models/Post');
+const postRoute  = express.Router();
 
-/* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+
+postRoute.get('/new', (req, res, next) => {
+  res.render('posts/new');
 });
 
-module.exports = router;
+postRoute.post('/new', (req, res, next) => {
+
+    const user = req.user.id;
+    const {title, type, content} = req.body;
+
+    const post = new Post({
+        title,
+        type,
+        content,
+        author: user
+    });
+
+    res.redirect('/post/new');
+});
+
+module.exports = postRoute;
