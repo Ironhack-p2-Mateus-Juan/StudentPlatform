@@ -1,8 +1,8 @@
-<form class="needs-validation" action="/post/new" method="POST" id="new-post" {{!-- enctype="multipart/form-data" --}} novalidate>
+<form class="needs-validation" action="/post/edit/{{id}}" method="POST" id="update-post" {{!-- enctype="multipart/form-data" --}} novalidate>
     <div class="form-row">
         <div class="col-md-12 mb-3">
-            <label for="new-post">Title</label>
-            <input minlength="10" type="text" class="form-control" name="title" required>
+            <label for="update-post">Title</label>
+            <input minlength="10" type="text" class="form-control" name="title" placeholder="{{title}}" required>
             <div class="invalid-feedback">
                 Your post title should have at least 10 characters.
             </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-12 mb-3">
-            <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required></textarea>
+            <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required>{{content}}</textarea>
             <div class="invalid-feedback">
                 Your post should have at least 20 characters.
             </div>
@@ -33,5 +33,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new post">Share Post</button>
+    <button class="btn btn-success" type="submit" data-toggle="tooltip" title="Save changes">Save</button>
+    <a href="/post" class="btn btn-warning" data-toggle="tooltip" title="Cancel edit">Cancel</a>
 </form>

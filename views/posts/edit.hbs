@@ -3,7 +3,7 @@
 <div class="card-group">
 
     {{#each publications}}
-    <div class="card">
+    <div class="card col">
         {{!--
         <img class="card-img-top" src="..." alt="Card image cap"> --}}
         <div class="card-body">
@@ -16,9 +16,18 @@
                 <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
             </p>
         </div>
-        <form action="/post/update/{{this.id}}" method="GET">
-            <button type="submit" class="btn btn-warning">Edit</button>
-        </form>
+        <div class="row">
+            <form action="/post/edit/{{this.id}}" method="GET">
+                <button type="submit" class="btn btn-warning" data-toggle="tooltip" title="Edit this post">
+                    <i class="far fa-edit"></i>
+                </button>
+            </form>
+            <form action="/post/delete/{{this.id}}" method="GET">
+                <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete this post">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </div>
     </div>
     {{/each}}
 </div>

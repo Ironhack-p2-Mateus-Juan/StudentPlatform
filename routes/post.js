@@ -45,11 +45,34 @@ postRoute.post("/new", (req, res, next) => {
 
 /* Update post */
 postRoute.get("/edit", (req, res, next) => {
-    User.findById(req.user.id)
+  User.findById(req.user.id)
     .populate("publications")
     .exec((err, user) => {
-        console.log(user.publications);
       res.render("posts/edit", user);
+    });
+});
+
+postRoute.get("/edit/:id", (req, res, next) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      res.render("posts/update", post);
+    })
+    .catch(err => {
+      res.render("error", err);
+    });
+});
+
+postRoute.post("/edit/:id", (req, res, next) => {
+  const { title, type, content } = req.body;
+  const update = { title, type, content };
+
+  Post.findByIdAndUpdate(req.params.id, update)
+    .then(post => {
+      console.log(post);
+      res.redirect("/post");
+    })
+    .catch(err => {
+        res.render("error", err);
     });
 });
 
