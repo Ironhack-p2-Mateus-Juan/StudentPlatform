@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const participantSchema = new Schema(
   {
-    users: { type: Object, required: true }
+    users: { type: Object, required: true },
+    event: { type: Object, required: true }
   },
   {
     timestamps: {

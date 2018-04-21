@@ -83,4 +83,7 @@ app.use("/auth", authRoutes);
 const userRoutes = require("./routes/user");
 app.use("/user", userRoutes);
 
+const postRoutes = require("./routes/post");
+app.use("/post", postRoutes);
+
 module.exports = app;
