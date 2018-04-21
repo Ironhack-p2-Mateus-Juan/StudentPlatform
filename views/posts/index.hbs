@@ -1,0 +1,24 @@
+<h1>All posts</h1>
+
+<div class="card-group">
+
+  {{#each post}}
+  <div class="card">
+    {{!--
+    <img class="card-img-top" src="..." alt="Card image cap"> --}}
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <p class="card-text">{{content}}</p>
+       <p class="card-text">
+        <small class="text-muted">Created {{created_at}}</small>
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Writen by {{author.email}}</small>
+      </p>
+    </div>
+  </div>
+  {{/each}}
+</div>
