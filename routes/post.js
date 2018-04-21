@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../models/User");
 const Post = require("../models/Post");
 const postRoute = express.Router();
 
@@ -18,20 +19,22 @@ postRoute.get("/new", (req, res, next) => {
 });
 
 postRoute.post("/new", (req, res, next) => {
+  const user = req.user;
   const { title, type, content } = req.body;
   /* ========================== Verificar **imagePath** ====================== */
   const post = new Post({
     title,
     type,
     content,
-    author: req.user.id
+    author: user.id
     /* imagePath: req.file.filename */
   });
 
   post
     .save()
     .then(() => {
-      console.log("Post saved in DB");
+      user.publications.push(post.id);
+      user.save();
     })
     .catch(err => {
       res.render("error", err);
@@ -40,15 +43,14 @@ postRoute.post("/new", (req, res, next) => {
   res.redirect("/post/new");
 });
 
-
 /* Update post */
-postRoute.get("/update", (req, res, next) => {
-
-    
-
-    res.render("posts/update");
-  });
-
-
+postRoute.get("/edit", (req, res, next) => {
+    User.findById(req.user.id)
+    .populate("publications")
+    .exec((err, user) => {
+        console.log(user.publications);
+      res.render("posts/edit", user);
+    });
+});
 
 module.exports = postRoute;
