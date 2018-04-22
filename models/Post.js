@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema(
   {
+    type: { type: String, default: "Post" },
     title: { type: String, required: true },
-    type: { type: String, enum: ["Post", "Event"], required: true },
     content: { type: Object, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'User' },
+    author: { type: Schema.Types.ObjectId, ref: "User" },
     imagePath: String
   },
   {

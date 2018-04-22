@@ -2,9 +2,11 @@ const express = require("express");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const postRoute = express.Router();
+const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
+const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
 /* Show all posts */
-postRoute.get("/", (req, res, next) => {
+postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
   Post.find()
     .populate("author")
     .exec((err, post) => {
@@ -14,13 +16,14 @@ postRoute.get("/", (req, res, next) => {
 });
 
 /* Create new post */
-postRoute.get("/new", (req, res, next) => {
+postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
   res.render("posts/new");
 });
 
-postRoute.post("/new", (req, res, next) => {
+postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
   const user = req.user;
   const { title, type, content } = req.body;
+  
   /* ========================== Verificar **imagePath** ====================== */
   const post = new Post({
     title,
@@ -44,7 +47,7 @@ postRoute.post("/new", (req, res, next) => {
 });
 
 /* Update post */
-postRoute.get("/edit", (req, res, next) => {
+postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
   User.findById(req.user.id)
     .populate("publications")
     .exec((err, user) => {
@@ -52,7 +55,7 @@ postRoute.get("/edit", (req, res, next) => {
     });
 });
 
-postRoute.get("/edit/:id", (req, res, next) => {
+postRoute.get("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findById(req.params.id)
     .then(post => {
       res.render("posts/update", post);
@@ -62,7 +65,7 @@ postRoute.get("/edit/:id", (req, res, next) => {
     });
 });
 
-postRoute.post("/edit/:id", (req, res, next) => {
+postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   const { title, type, content } = req.body;
   const update = { title, type, content };
 
@@ -76,7 +79,7 @@ postRoute.post("/edit/:id", (req, res, next) => {
     });
 });
 
-postRoute.get("/delete/:id", (req, res, next) => {
+postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findByIdAndRemove(req.params.id)
     .then(() => {
       res.redirect("/post/edit");

@@ -17,16 +17,14 @@
             </p>
         </div>
         <div class="row">
-            <form action="/post/edit/{{this.id}}" method="GET">
-                <button type="submit" class="btn btn-warning" data-toggle="tooltip" title="Edit this post">
-                    <i class="far fa-edit"></i>
-                </button>
-            </form>
-            <form action="/post/delete/{{this.id}}" method="GET">
-                <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete this post">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </form>
+            <div class="col-md-12 text-right">
+                <a href="/post/edit/{{this.id}}" class="btn btn-warning pr-4 pl-4 pt-2 pb-2 m-2" data-toggle="tooltip" title="Edit this post">
+                    <i class="far fa-edit mr-2"></i>Edit
+                </a>
+                <a href="/post/delete/{{this.id}}" class="btn btn-danger pr-4 pl-4 pt-2 pb-2 m-2" data-toggle="tooltip" title="Delete this post">
+                    <i class="fas fa-trash-alt mr-2"></i>Delete
+                </a>
+            </div>
         </div>
     </div>
     {{/each}}
