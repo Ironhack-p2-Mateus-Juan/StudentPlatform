@@ -1,34 +1,32 @@
 <div class="container">
-
-
-
-<form class="needs-validation" action="/post/edit/{{id}}" method="POST" id="update-post" {{!-- enctype="multipart/form-data" --}} novalidate>
-    <div class="form-row mt-3">
-        <div class="col-md-12 mb-3">
-            <input minlength="10" type="text" class="form-control" name="title" placeholder="{{post.title}}" required>
-            <div class="invalid-feedback">
-                Your post title should have at least 10 characters.
+    <form class="needs-validation" action="/post/edit/{{id}}" method="POST" id="update-post" {{!-- enctype="multipart/form-data"
+        --}} novalidate>
+        <div class="form-row mt-3">
+            <div class="col-md-12 mb-3">
+                <input minlength="10" type="text" class="form-control" name="title" placeholder="{{post.title}}" required>
+                <div class="invalid-feedback">
+                    Your post title should have at least 10 characters.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
-            <div class="valid-feedback">
-                Looks good!
+            <div class="col-md-12 mb-3">
+                <textarea minlength="20" class="form-control" rows="10" name="content" placeholder="Start writing!" required>{{post.content}}</textarea>
+                <div class="invalid-feedback">
+                    Your post should have at least 20 characters.
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="submitImage" name="image">
+                    <label class="custom-file-label" for="submitImage">Share an image</label>
+                </div>
             </div>
         </div>
-        <div class="col-md-12 mb-3">
-            <textarea minlength="20" class="form-control" rows="10" name="content" placeholder="Start writing!" required>{{post.content}}</textarea>
-            <div class="invalid-feedback">
-                Your post should have at least 20 characters.
-            </div>
+        <div class="text-right">
+            <button class="btn btn-success mr-3 pr-3 pl-3" type="submit" data-toggle="tooltip" title="Save changes">Save</button>
+            <a href="/post/edit" class="btn btn-warning" data-toggle="tooltip" title="Cancel edit">Cancel</a>
         </div>
-        <div class="col-md-12 mb-3">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="submitImage" name="image">
-                <label class="custom-file-label" for="submitImage">Share an image</label>
-            </div>
-        </div>
-    </div>
-    <div class="text-right">
-    <button class="btn btn-success mr-3" type="submit" data-toggle="tooltip" title="Save changes">Save</button>
-    <a href="/post/edit" class="btn btn-warning" data-toggle="tooltip" title="Cancel edit">Cancel</a>
-    </div>
-</form>
+    </form>
 </div>

@@ -73,8 +73,8 @@ postRoute.get("/edit/:id", ensureLoggedIn(), (req, res, next) => {
 });
 
 postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
-  const { title, type, content } = req.body;
-  const update = { title, type, content };
+  const { title, content } = req.body;
+  const update = { title, content };
 
   Post.findByIdAndUpdate(req.params.id, update)
     .then(post => {
