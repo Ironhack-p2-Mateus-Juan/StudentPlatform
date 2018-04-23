@@ -23,9 +23,7 @@ router.post("/new", (req, res, next) => {
   const { title, description, date, address } = req.body;
   let lat, lng;
 
-  googleMapsClient
-    .geocode({ address })
-    .asPromise()
+  googleMapsClient.geocode({ address }).asPromise()
     .then(data => {
       lat = data.json.results[0].geometry.viewport.northeast.lat;
       lng = data.json.results[0].geometry.viewport.northeast.lng;
@@ -82,6 +80,31 @@ router.get("/edit/:id", (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+router.post("/edit/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  const {title, description, date, location} = req.body;
+
+  let newLocation = {};
+
+  googleMapsClient.geocode({ address: location }).asPromise()
+    .then(data => {
+
+      lat = data.json.results[0].geometry.viewport.northeast.lat;
+      lng = data.json.results[0].geometry.viewport.northeast.lng;
+
+      newLocation = {
+        type: "Point",
+        coordinates: [lat, lng]
+      };
+
+      Event.findByIdAndUpdate(id, {title, description, date, location: newLocation})
+      .then( () => res.redirect("/event"))
+      .catch( err => next(err));
+    })
+    .catch(err => next(err));
+})
 
 router.get("/delete/:id", (req, res, next) => {
   const id = req.params.id;
