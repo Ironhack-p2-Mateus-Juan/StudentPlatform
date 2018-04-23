@@ -10,7 +10,8 @@ const userSchema = new Schema(
     imgName: String,
     imgPath: String,
     bootcamp: { type: String, enum: ["Web", "UX", ""] },
-    publications: [{ type: Schema.Types.ObjectId, ref: "Post" }]
+    publications: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    description: String
   },
   {
     timestamps: {
