@@ -1,27 +1,35 @@
-<h1>All posts</h1>
+<div class="container-fluid d-flex justify-content-center card-group">
 
-<div class="card-group">
+  <div class="container d-flex row justify-content-center mt-3 p-0">
+    {{#each users}} {{#each publications}}
+    <div class="card col-md-4 p-2 mb-2">
+      {{!--
+      <img class="card-img-top" src="..." alt="Card image cap"> --}}
+      <div class="card-body d-flex flex-column justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+        <p class="card-text">{{thumb}}</p>
+        <div id="post-vcard">
 
-  {{#each users}} {{#each publications}}
-  <div class="card">
-    {{!--
-    <img class="card-img-top" src="..." alt="Card image cap"> --}}
-    <div class="card-body">
-      <h5 class="card-title">{{title}}</h5>
-      <p class="card-text">{{thumb}}</p>
-      <p class="card-text">
-        <small class="text-muted">Created {{created_at}}</small>
-      </p>
-      <p class="card-text">
-        <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
-      </p>
-    <a href="/post/{{id}}" class="btn btn-primary">Read more</a>
+          <p class="card-text m-0">
+            <small class="text-muted">Created {{created_at}}</small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Last updated {{updated_at}}
+              <br>Type: {{type}}</small>
+          </p>
+        </div>
+        <p class="card-text">
+          {{!-- Change "email" for "username" --}}
+          <small class="text-muted">Writen by
+            <b>{{#if ../username}}{{../username}}{{else}}{{../email}}{{/if}}</b>
+          </small>
+        </p>
+        <div class="container-fluid text-right">
+          <a href="/post/{{id}}" class="btn btn-dark btn-sm col-sm-4">Read more</a>
+
+        </div>
+      </div>
     </div>
-    <p class="card-text">
-      {{!-- Change "email" for "username" --}}
-      <small class="text-muted">Writen by {{#if ../username}}{{../username}}{{else}}{{../email}}{{/if}}</small>
-    </p>
+    {{/each}} {{/each}}
   </div>
-  {{/each}} {{/each}}
-
 </div>

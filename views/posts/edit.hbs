@@ -1,8 +1,7 @@
-<div class="container d-flex flex-column flex-wrap">
-
-    <div class="d-flex row justify-content-center mt-3">
+<div class="container-fluid d-flex flex-column align-items-center p-0">
+    <div class="container d-flex row justify-content-center">
         {{#each all.publications}}
-        <div class="card col-md-5 p-2 m-1">
+        <div class="card col-md-8 p-2 m-1">
             {{!--
             <img class="card-img-top" src="..." alt="Card image cap"> --}}
             <div class="card-body p-2">
@@ -14,13 +13,11 @@
                 <p class="card-text">
                     <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
                 </p>
-                <p class="card-text">
+                <p class="card-text mb-0">
                     <small class="text-muted">Writen by {{#if ../user.username}}{{../user.username}}{{else}}{{../user.email}}{{/if}}</small>
                 </p>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <a href="/post/edit/{{this.id}}" class="btn btn-warning btn-sm pr-3 pl-3 pt-1 pb-1 m-2" data-toggle="tooltip" title="Edit this post">
+                <div class="container-fluid text-right">
+                    <a href="/post/edit/{{this.id}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Edit this post">
                         <i class="far fa-edit mr-2"></i>Edit
                     </a>
                     <a href="/post/delete/{{this.id}}" class="btn btn-danger btn-sm pl-3" data-toggle="tooltip" title="Delete this post">
