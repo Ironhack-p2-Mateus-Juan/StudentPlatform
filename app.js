@@ -15,17 +15,17 @@ const flash = require("connect-flash");
 
 mongoose.Promise = Promise;
 mongoose
- .connect("mongodb://localhost/studentplatform")
- .then(() => {
-   console.log("Connected to Awesome Project!");
- })
- .catch(err => {
-   console.error("Error connecting to mongo", err);
- });
- 
- const app_name = require("./package.json").name;
- const debug = require("debug")(
- `${app_name}:${path.basename(__filename).split(".")[0]}`
+  .connect("mongodb://localhost/studentplatform")
+  .then(() => {
+    console.log("Connected to Awesome Project!");
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
+  });
+  
+  const app_name = require("./package.json").name;
+  const debug = require("debug")(
+  `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
 
 const app = express();
@@ -37,12 +37,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
- session({
-   secret: "i-drink-too-much-coffee-and-see-red-dragons",
-   resave: true,
-   saveUninitialized: true,
-   store: new MongoStore({ mongooseConnection: mongoose.connection })
- })
+  session({
+    secret: "i-drink-too-much-coffee-and-see-red-dragons",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
 );
 require("./passport")(app);
 
@@ -89,19 +89,19 @@ app.use("/post", postRoutes);
 
 // catch 404 and render a not-found.hbs template
 app.use((req, res, next) => {
- res.status(404);
- res.render('not-found');
+  res.status(404);
+  res.render('not-found');
 });
 
 app.use((err, req, res, next) => {
- // always log the error
- console.error('ERROR', req.method, req.path, err);
+  // always log the error
+  console.error('ERROR', req.method, req.path, err);
 
- // only render if the error ocurred before sending the response
- if (!res.headersSent) {
-   res.status(500);
-   res.render('error');
- }
+  // only render if the error ocurred before sending the response
+  if (!res.headersSent) {
+    res.status(500);
+    res.render('error');
+  }
 });
 
 module.exports = app;
