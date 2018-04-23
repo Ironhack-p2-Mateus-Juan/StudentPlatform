@@ -7,12 +7,10 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
 /* Show all posts */
 postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
-  
   User.find()
     .populate("publications")
     .exec((err, users) => {
-      console.log(users);
-      res.render("posts/index", {users});
+      res.render("posts/index", { users });
     });
 });
 
@@ -29,7 +27,7 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
   const post = new Post({
     title,
     type,
-    content,
+    content
     /*
     * author: user.id
     *
@@ -96,12 +94,10 @@ postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
           res.redirect("/post/edit");
         })
         .catch(err => {
-          console.log(err);
           res.render("error", err);
         });
     })
     .catch(err => {
-      console.log(err);
       res.render("error", err);
     });
 });
