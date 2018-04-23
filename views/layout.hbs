@@ -91,11 +91,9 @@
           </div>
           {{/unless}} {{#if user}}
           <li class="nav-item dropdown">
-            <a class="nav-link" href="/user">{{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle mt-1 pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
+            <a class="nav-link dropdown-toggle pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
+              {{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}
               <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
