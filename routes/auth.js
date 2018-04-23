@@ -9,10 +9,6 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-authRoutes.get("/login", ensureLoggedOut(), (req, res, next) => {
-  res.render("auth/login", { message: req.flash("error") });
-});
-
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
@@ -22,10 +18,6 @@ authRoutes.post(
     passReqToCallback: true
   })
 );
-
-authRoutes.get("/signup", ensureLoggedOut(), (req, res, next) => {
-  res.render("auth/signup");
-});
 
 authRoutes.post("/signup", (req, res, next) => {
   const email = req.body.email;
