@@ -18,8 +18,10 @@ router.post(
   [ensureLoggedIn("/auth/login"), uploadCloud.single("photo")],
   (req, res, next) => {
     user = req.user;
-    const { fullName, username, email, bootcamp } = req.body;
-    const userUpdate = { fullName, username, email, bootcamp };
+    const { fullName, username, email, bootcamp, password} = req.body;
+
+    /* ====================== Remember to verify if empty fields in DOM are being updated in DB!! ====================== */
+    const userUpdate = { fullName, username, email, bootcamp, password };
 
     if (req.file) {
       userUpdate.imgName = req.file.originalname;
