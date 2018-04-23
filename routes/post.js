@@ -76,6 +76,10 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   const { title, content } = req.body;
   const update = { title, content };
 
+  (content.length > 200) ? thumb = content.slice(0, 200) + "..." : thumb = content;
+
+  update.thumb = thumb;
+
   Post.findByIdAndUpdate(req.params.id, update)
     .then(post => {
       res.redirect("/post");

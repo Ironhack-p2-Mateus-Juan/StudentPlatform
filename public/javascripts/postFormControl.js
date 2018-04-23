@@ -5,8 +5,8 @@
     function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       let forms = document.getElementsByClassName("needs-validation");
-      
-      // Loop over elements and prevent submission
+
+      // Loop over them and prevent submission
       let validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener(
           "submit",
@@ -21,7 +21,7 @@
         );
       });
 
-      // Show file name of selected image
+      /* Show file name of selected image */
       $(".custom-file-input").on("change", function() {
         let fileName = $(this)
           .val()
@@ -35,7 +35,7 @@
     },
     false
   );
-});
+})();
 
 $(document).ready(() => {
   let date = new Date();
