@@ -1,15 +1,16 @@
-<h1>All posts by user {{email}} </h1>
+<h1>All posts by user {{user.email}} </h1>
+
+<div class="container d-flex flex-column">
 
 <div class="card-group">
-
-    {{#each publications}}
-    <div class="card col">
+    {{#each all.publications}}
+    <div class="card col p-2 m-2">
         {{!--
         <img class="card-img-top" src="..." alt="Card image cap"> --}}
-        <div class="card-body">
+        <div class="card-body p-2">
             <h5 class="card-title">{{title}}</h5>
-            <p class="card-text">{{content}}</p>
-            <p class="card-text">
+            <p class="card-text mb-3">{{thumb}}</p>
+            <p class="card-text m-0">
                 <small class="text-muted">Created {{created_at}}</small>
             </p>
             <p class="card-text">
@@ -28,4 +29,5 @@
         </div>
     </div>
     {{/each}}
+</div>
 </div>

@@ -12,13 +12,25 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <select class="custom-select" name="type" required>
+                    <select class="custom-select" name="type" id="post-type" required>
                         <option value="">Select type</option>
                         <option value="Post">Post</option>
                         <option value="Event">Event</option>
                     </select>
                     <div class="invalid-feedback">Choose your post type</div>
                 </div>
+            </div>
+           <div class="col-md-12 mb-3 hidden" id="form-event-address">
+                <input minlength="10" type="text" class="form-control" name="address" placeholder="Address" required>
+                <div class="invalid-feedback">
+                    Your address should have at least 10 characters.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12 mb-3 hidden" id="form-event-date">
+                <input minlength="10" type="date" id="input-event-date" min="" class="form-control" name="date" placeholder="Date" required>
             </div>
             <div class="col-md-12 mb-3">
                 <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required></textarea>
@@ -36,9 +48,12 @@
         <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new post">Share Post</button>
     </form>
 
-<div class="d-flex flex-column justify-content-between p-2" id="post-tips">
-    <p>Share something about your daily life in Ironhack!</p> <p>What kind of project are you doing today?</p>
-</div>
+    <div class="hidden" id="post-tips-container">
+        <div class="d-flex flex-column justify-content-around p-3" id="post-tips">
+            <p class="mb-2">Share something about your daily life in Ironhack!</p>
+            <p class="m-0">What kind of project are you doing today?</p>
+        </div>
+    </div>
 
 
 </div>

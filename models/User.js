@@ -9,7 +9,7 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     imgName: String,
     imgPath: String,
-    bootcamp: {type: String, enum: ['Web', 'UX']},
+    bootcamp: {type: String, enum: ['Web', 'UX', '']},
     publications: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
   },
   {

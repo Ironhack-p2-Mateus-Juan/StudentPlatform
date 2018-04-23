@@ -10,13 +10,13 @@ postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
   User.find()
     .populate("publications")
     .exec((err, users) => {
-      res.render("posts/index", { users });
+      res.render("posts/index", { users, user: req.user });
     });
 });
 
 /* Create new post */
 postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
-  res.render("posts/new");
+  res.render("posts/new", { user: req.user });
 });
 
 postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
@@ -27,7 +27,8 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
   const post = new Post({
     title,
     type,
-    content
+    content,
+    thumb: content.slice(0, 200) + "..."
     /*
     * author: user.id
     *
@@ -35,14 +36,16 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
     //imagePath: req.file.filename
   });
 
+  console.log(post.thumb);
   post
     .save()
     .then(() => {
+      console.log("entra");
       user.publications.push(post.id);
       user.save();
     })
     .catch(err => {
-      res.render("error", err);
+      res.render("error", { user: req.user });
     });
 
   res.redirect("/post");
@@ -52,18 +55,18 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
 postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
   User.findById(req.user.id)
     .populate("publications")
-    .exec((err, user) => {
-      res.render("posts/edit", user);
+    .exec((err, all) => {
+      res.render("posts/edit", { all, user: req.user });
     });
 });
 
 postRoute.get("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findById(req.params.id)
     .then(post => {
-      res.render("posts/update", post);
+      res.render("posts/update", { post, user: req.user });
     })
     .catch(err => {
-      res.render("error", err);
+      res.render("error", { user: req.user });
     });
 });
 
@@ -76,7 +79,7 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
       res.redirect("/post");
     })
     .catch(err => {
-      res.render("error", err);
+      res.render("error", { user: req.user });
     });
 });
 
@@ -94,11 +97,21 @@ postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
           res.redirect("/post/edit");
         })
         .catch(err => {
-          res.render("error", err);
+          res.render("error", { user: req.user });
         });
     })
     .catch(err => {
-      res.render("error", err);
+      res.render("error", { user: req.user });
+    });
+});
+
+postRoute.get("/:id", ensureLoggedIn(), (req, res, next) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      res.render("posts/read", {post, user:req.user});
+    })
+    .catch(err => {
+      res.render("error", { user: req.user });
     });
 });
 

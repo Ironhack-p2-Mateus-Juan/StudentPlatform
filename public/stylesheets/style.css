@@ -11,7 +11,7 @@ body {
 
 .navbar {
   height: 60px;
-  box-shadow: 1px 2px 8px #030303; }
+  box-shadow: 1px 2px 8px #aaaaaa; }
   .navbar li a {
     padding-top: 20px;
     padding-bottom: 15px; }
@@ -43,7 +43,8 @@ body {
   bottom: 0;
   height: 80px;
   color: #686868;
-  background-color: #010014; }
+  background-color: #8b8b8b52;
+  z-index: 110; }
 
 .btest {
   border: 1px solid #ca0000; }
@@ -53,9 +54,12 @@ body {
   left: 5%;
   top: 15%;
   text-align: center;
-  height: 150px;
-  width: 200px;
+  width: 250px;
+  border-radius: 8px;
   background-color: #f0f0f0;
   box-shadow: 1px 2px 8px #acacac; }
+
+.hidden {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
