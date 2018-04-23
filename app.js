@@ -71,7 +71,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
  }
 });
 
-app.locals.title = "Ironhack - Student Platform";
+app.locals.title = "Student Platform";
 app.locals.brand = "http://localhost:3000/images/logo.png";
 app.locals.avatar = "http://localhost:3000/images/avatar.png";
 

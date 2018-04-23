@@ -80,6 +80,9 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
 });
 
 postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
+
+  /* ==================== Falta: Borrar ID del post también del array "publications" de Usuario!!! ================== */
+
   Post.findByIdAndRemove(req.params.id)
     .then(() => {
       res.redirect("/post/edit");
