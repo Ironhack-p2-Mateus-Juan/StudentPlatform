@@ -6,21 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
     crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js" integrity="sha384-lZmvU/TzxoIQIOD9yQDEpvxp6wEU32Fy0ckUgOH4EIlMOCdR823rg4+3gWRwnX1M"
-    crossorigin="anonymous"></script>
 
   <link rel='stylesheet' href='/stylesheets/style.css'>
+
   <title>{{title}}</title>
 </head>
 
 <body>
+<<<<<<< HEAD
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -50,11 +47,120 @@
         </li>
         {{/if}}
       </ul>
-    </div>
-  </nav>
+=======
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light pt-0 pb-0" id="main-nav">
+      <div class="collapse navbar-collapse " id="navbarNavDropdown">
+        <a class="navbar-brand" href="/">
+          <img src={{brand}} width="30" height="30" class="d-inline-block align-top" alt="Ironahck"> Student Platform
+        </a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
 
+        <ul class="navbar-nav">
+
+          {{#unless user}}
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary pr-4 pl-4" data-toggle="modal" data-target="#loginModal">
+            Log in
+          </button>
+
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Log in with your account</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation" action="/auth/login" method="POST" id="form-container" novalidate>
+
+                    <div>
+
+                      <label for="username">Email</label>
+                      <input class="form-control" id="username" type="email" name="username" placeholder="Your email" required>
+                      <div class="invalid-feedback">
+                        Invalid email.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <label for="password">Password</label>
+                      <input class="form-control" id="password" type="password" name="password" placeholder="Your password" required>
+                      <div class="invalid-feedback">
+                        Your password is invalid.
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Log in</button>
+                      <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/unless}} {{!-- {{#if user}} --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+              <a class="dropdown-item pt-2 pb-2" href="#">
+                <i class="fas fa-user-circle mr-2"></i>Profile</a>
+              <a class="dropdown-item pt-2 pb-2" href="/post">
+                <i class="fas fa-th mr-2"></i>View posts</a>
+              <a class="dropdown-item pt-2 pb-2" href="/post/new">
+                <i class="far fa-plus-square mr-2"></i>Write new post</a>
+              <a class="dropdown-item pt-2 pb-2" href="/post/edit">
+                <i class="far fa-edit mr-2"></i>Edit post</a>
+              <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            </div>
+          </li>
+          {{!-- {{/if}} --}}
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main" class="container-fluid p-0 pt-2 mb-5">
+
+    {{{body}}}
+
+  </main>
+
+  <footer class="footer container-fluid d-flex align-items-center">
+    <div class="container">
+      <span>Made with
+        <i class="fas fa-heart"></i> by Ironhackers.</span>
+>>>>>>> 9ceace151d45c2cd68c5d8554fc5daa971177827
+    </div>
+  </footer>
+
+<<<<<<< HEAD
   {{{body}}}
+=======
+
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js" integrity="sha384-lZmvU/TzxoIQIOD9yQDEpvxp6wEU32Fy0ckUgOH4EIlMOCdR823rg4+3gWRwnX1M"
+    crossorigin="anonymous"></script>
+>>>>>>> 9ceace151d45c2cd68c5d8554fc5daa971177827
   <script src='/javascripts/script.js'></script>
+  <script src='/javascripts/postFormControl.js'></script>
 </body>
 
 </html>

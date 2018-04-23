@@ -1,0 +1,31 @@
+<h1>All posts by user {{email}} </h1>
+
+<div class="card-group">
+
+    {{#each publications}}
+    <div class="card col">
+        {{!--
+        <img class="card-img-top" src="..." alt="Card image cap"> --}}
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{content}}</p>
+            <p class="card-text">
+                <small class="text-muted">Created {{created_at}}</small>
+            </p>
+            <p class="card-text">
+                <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="/post/edit/{{this.id}}" class="btn btn-warning pr-4 pl-4 pt-2 pb-2 m-2" data-toggle="tooltip" title="Edit this post">
+                    <i class="far fa-edit mr-2"></i>Edit
+                </a>
+                <a href="/post/delete/{{this.id}}" class="btn btn-danger pr-4 pl-4 pt-2 pb-2 m-2" data-toggle="tooltip" title="Delete this post">
+                    <i class="fas fa-trash-alt mr-2"></i>Delete
+                </a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

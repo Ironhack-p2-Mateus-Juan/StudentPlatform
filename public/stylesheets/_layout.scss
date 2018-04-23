@@ -1,0 +1,64 @@
+body {
+    background-color: #e6e6e6;
+    padding-bottom: $footer-heigh;
+    box-sizing: border-box;
+}
+
+.flex-grow{
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: #000dca;
+}
+
+.navbar {
+    height: 60px;
+    box-shadow: 1px 2px 8px #030303;
+    li a {
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+}
+
+.active {
+    background-color: rgb(223, 223, 223);
+}
+
+#profile-image {
+    border-radius: 30px;
+    border: 2px solid #cecece;
+}
+
+.dropdown-toggle::after {
+    display: none
+}
+
+.index {
+    height: 250px;
+    color: #ffffff;
+    background-color: #00065f;
+}
+
+.sign-up {
+    div {
+        background-color: #ffffff;
+        .invalid-feedback {
+            left: 0;
+            top: 35px;
+        }
+    }
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: $footer-heigh;
+    color: #686868;
+    background-color: #010014;
+}
+
+.btest {
+    border: 1px solid #ca0000;
+}

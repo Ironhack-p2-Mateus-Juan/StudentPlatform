@@ -1,5 +1,5 @@
 const express = require("express");
-const passport = require('passport');
+const passport = require("passport");
 const User = require("../models/User");
 const authRoutes = express.Router();
 const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
@@ -10,15 +10,18 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 authRoutes.get("/login", ensureLoggedOut(), (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
+  res.render("auth/login", { message: req.flash("error") });
 });
 
-authRoutes.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+authRoutes.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/auth/login",
+    failureFlash: true,
+    passReqToCallback: true
+  })
+);
 
 authRoutes.get("/signup", ensureLoggedOut(), (req, res, next) => {
   res.render("auth/signup");
@@ -46,7 +49,7 @@ authRoutes.post("/signup", (req, res, next) => {
       password: hashPass
     });
 
-    newUser.save((err) => {
+    newUser.save(err => {
       if (err) {
         console.log(err);
         res.render("auth/signup", { message: "Something went wrong" });

@@ -1,8 +1,40 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="index d-flex align-items-center justify-content-center text-center p-3">
+    <div class="w-50">
+        <h1>{{title}}</h1>
+        <h2 class="mt-4">Transform ideas. Share knowledge.</h2>
+    </div>
+</div>
 
+<<<<<<< HEAD
 {{#if user}}
   <h2>Home logged</h2>
 {{else}}
   <h2>Home signup</h2>
 {{/if}}
+=======
+<div class="sign-up d-flex align-items-center justify-content-center text-center p-3">
+    <div class="w-60 d-flex flex-column align-items-center justify-content-center mt-3 p-3 pr-4 pl-4">
+        <div class="w-75 text-center">
+            <h3>Join us!</h3>
+            <p>Are you an Ironhacker?
+                <br>Join us in this platform built for UX and Web students!</p>
+
+        </div>
+        <form class="needs-validation d-flex p-3" action="/auth/signup" method="POST" id="sign-up-form-container" novalidate>
+            <div class="col-sm-5">
+                <input class="form-control" id="sign-up-email" type="email" name="email" placeholder="Email" required>
+                <div class="invalid-feedback position-absolute">
+                    Invalid email.
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <input class="form-control" id="sign-up-password" type="password" name="password" placeholder="Password" required>
+                <div class="invalid-feedback position-absolute">
+                    You should have a password!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary m-0 col-sm-2">Sign up</button>
+        </form>
+    </div>
+</div>
+>>>>>>> 9ceace151d45c2cd68c5d8554fc5daa971177827
