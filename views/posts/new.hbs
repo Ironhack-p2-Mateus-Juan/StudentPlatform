@@ -1,37 +1,44 @@
-<form class="needs-validation" action="/post/new" method="POST" id="new-post" {{!-- enctype="multipart/form-data" --}} novalidate>
-    <div class="form-row">
-        <div class="col-md-12 mb-3">
-            <label for="new-post">Title</label>
-            <input minlength="10" type="text" class="form-control" name="title" required>
-            <div class="invalid-feedback">
-                Your post title should have at least 10 characters.
+<div class="container w-50">
+    <form class="needs-validation" action="/post/new" method="POST" id="new-post" {{!-- enctype="multipart/form-data" --}} novalidate>
+        <div class="form-row">
+            <div class="col-md-12 mb-3 mt-5">
+                <input minlength="10" type="text" class="form-control" name="title" placeholder="Title" required>
+                <div class="invalid-feedback">
+                    Your post title should have at least 10 characters.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
-            <div class="valid-feedback">
-                Looks good!
+            <div class="col-md-12">
+                <div class="form-group">
+                    <select class="custom-select" name="type" required>
+                        <option value="">Select type</option>
+                        <option value="Post">Post</option>
+                        <option value="Event">Event</option>
+                    </select>
+                    <div class="invalid-feedback">Choose your post type</div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required></textarea>
+                <div class="invalid-feedback">
+                    Your post should have at least 20 characters.
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="submitImage" name="image">
+                    <label class="custom-file-label" for="submitImage">Share an image</label>
+                </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <select class="custom-select" name="type" required>
-                    <option value="">I am creating a...</option>
-                    <option value="Post">Post</option>
-                    <option value="Event">Event</option>
-                </select>
-                <div class="invalid-feedback">Choose your post type</div>
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-            <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required></textarea>
-            <div class="invalid-feedback">
-                Your post should have at least 20 characters.
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="submitImage" name="image">
-                <label class="custom-file-label" for="submitImage">Share an image</label>
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new post">Share Post</button>
-</form>
+        <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new post">Share Post</button>
+    </form>
+
+<div class="d-flex flex-column justify-content-between p-2" id="post-tips">
+    <p>Share something about your daily life in Ironhack!</p> <p>What kind of project are you doing today?</p>
+</div>
+
+
+</div>

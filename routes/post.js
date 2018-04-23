@@ -7,11 +7,12 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
 /* Show all posts */
 postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
-  Post.find()
-    .populate("author")
-    .exec((err, post) => {
-      post.reverse();
-      res.render("posts/index", { post });
+  
+  User.find()
+    .populate("publications")
+    .exec((err, users) => {
+      console.log(users);
+      res.render("posts/index", {users});
     });
 });
 
@@ -23,14 +24,17 @@ postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
 postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
   const user = req.user;
   const { title, type, content } = req.body;
-  
+
   /* ========================== Verificar **imagePath** ====================== */
   const post = new Post({
     title,
     type,
     content,
-    author: user.id
-    /* imagePath: req.file.filename */
+    /*
+    * author: user.id
+    *
+    * Uncomment below when ready for integrating with users */
+    //imagePath: req.file.filename
   });
 
   post
@@ -43,7 +47,7 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
       res.render("error", err);
     });
 
-  res.redirect("/post/new");
+  res.redirect("/post");
 });
 
 /* Update post */
@@ -71,7 +75,6 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
 
   Post.findByIdAndUpdate(req.params.id, update)
     .then(post => {
-      console.log(post);
       res.redirect("/post");
     })
     .catch(err => {
@@ -79,15 +82,26 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
+/* Delete post from both collections: Post and User */
 postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
+  let postToRemove = req.params.id;
 
-  /* ==================== Falta: Borrar ID del post también del array "publications" de Usuario!!! ================== */
-
-  Post.findByIdAndRemove(req.params.id)
+  Post.findByIdAndRemove(postToRemove)
     .then(() => {
-      res.redirect("/post/edit");
+      User.update(
+        { _id: req.user.id },
+        { $pullAll: { publications: [postToRemove] } }
+      )
+        .then(() => {
+          res.redirect("/post/edit");
+        })
+        .catch(err => {
+          console.log(err);
+          res.render("error", err);
+        });
     })
     .catch(err => {
+      console.log(err);
       res.render("error", err);
     });
 });

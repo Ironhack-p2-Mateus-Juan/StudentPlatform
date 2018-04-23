@@ -2,7 +2,7 @@
 
 <div class="card-group">
 
-  {{#each post}}
+  {{#each users}} {{#each publications}}
   <div class="card">
     {{!--
     <img class="card-img-top" src="..." alt="Card image cap"> --}}
@@ -15,10 +15,12 @@
       <p class="card-text">
         <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
       </p>
-      <p class="card-text">
-        <small class="text-muted">Writen by {{author.email}}</small>
-      </p>
     </div>
+    <p class="card-text">
+      {{!-- Change "email" for "username" --}}
+      <small class="text-muted">Writen by {{../email}}</small>
+    </p>
   </div>
-  {{/each}}
+  {{/each}} {{/each}}
+
 </div>
