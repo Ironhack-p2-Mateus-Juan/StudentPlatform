@@ -61,6 +61,7 @@ app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
+
 hbs.registerHelper("ifUndefined", (value, options) => {
  if (arguments.length < 2)
    throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
@@ -87,6 +88,9 @@ app.use("/user", userRoutes);
 
 const postRoutes = require("./routes/post");
 app.use("/post", postRoutes);
+
+const eventRoutes = require("./routes/event");
+app.use("/event", eventRoutes);
 
 // catch 404 and render a not-found.hbs template
 app.use((req, res, next) => {

@@ -6,7 +6,10 @@ const eventSchema = new Schema(
     type: { type: String, default:"Event" },
     title: { type: String, required: true },
     description: { type: String, required: true },
-    address: { type: String, required: true },
+    location: {
+      type: { type: String },
+      coordinates: [Number]
+    },
     date: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     participants: [{ type: Schema.Types.ObjectId, ref: 'User' }]
@@ -19,5 +22,7 @@ const eventSchema = new Schema(
   }
 );
 
-const Event = mongoose.model("Event", eventSchema);
+eventSchema.index({location: "2dsphere"});
+
+const Event = mongoose.model('Event', eventSchema);
 module.exports = Event;

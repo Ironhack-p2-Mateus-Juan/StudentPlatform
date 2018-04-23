@@ -46,23 +46,23 @@
       <div class="d-flex flex-column align-items-center col-md-4 p-3">
 
         <div class="form-group">
+          {{#if user.imgPath }}
           <figure class="figure">
             <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
           </figure>
+          {{else}}
+          <p>No image</p>
+          {{/if}}
         </div>
 
         <div class="form-group">
           <label for="photo">Update profile image</label>
           <input type="file" class="form-control-file" name="photo" id="photo">
         </div>
-          <textarea class="form-control" rows="5" name="description" placeholder="Tell us something about yourself..." required></textarea>
+        <textarea class="form-control" rows="5" name="description" placeholder="Tell us something about yourself..." required></textarea>
       </div>
 
     </form>
 
   </div>
 </div>
-
-{{!-- <p class="alert alert-light">
-  <a href="/user">Back to your profile</a>
-</p> --}}
