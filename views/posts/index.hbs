@@ -19,7 +19,7 @@
     </div>
     <p class="card-text">
       {{!-- Change "email" for "username" --}}
-      <small class="text-muted">Writen by {{../email}}</small>
+      <small class="text-muted">Writen by {{#if ../username}}{{../username}}{{else}}{{../email}}{{/if}}</small>
     </p>
   </div>
   {{/each}} {{/each}}

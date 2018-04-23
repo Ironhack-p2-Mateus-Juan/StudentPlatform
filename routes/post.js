@@ -23,12 +23,14 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
   const user = req.user;
   const { title, type, content } = req.body;
 
+  (content.length > 200) ? thumb = content.slice(0, 200) + "..." : thumb = content;
+
   /* ========================== Verificar **imagePath** ====================== */
   const post = new Post({
     title,
     type,
     content,
-    thumb: content.slice(0, 200) + "..."
+    thumb
     /*
     * author: user.id
     *

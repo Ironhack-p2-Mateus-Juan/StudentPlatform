@@ -5,8 +5,7 @@
     function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       let forms = document.getElementsByClassName("needs-validation");
-
-      // Convert to jquery code if needed
+      
       // Loop over elements and prevent submission
       let validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener(
@@ -36,6 +35,9 @@
     },
     false
   );
+});
+
+$(document).ready(() => {
   let date = new Date();
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
