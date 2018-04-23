@@ -1,0 +1,26 @@
+<h1>User list</h1>
+
+{{#each users}}
+  <div class="user-item">
+    <div class="user-item-username">
+      <p>{{this.username}}</p>
+    </div>
+    <div class="user-item-email">
+      <p>{{this.email}}</p>
+    </div>
+    <div class="user-item-image">
+      {{#if this.imgPath }}
+        <img src="{{this.imgPath}}" alt="{{this.username}} image">
+      {{else}}
+        <p>No image</p>
+      {{/if}}
+    </div>
+    <div class="user-item-edit">
+      <a href="/user/edit/{{this.id}}">Edit</a>
+    </div>
+    <div class="user-item-delete">
+      <a href="/user/delete/{{this.id}}">Delete</a>
+    </div>
+  </div>
+  <hr>
+{{/each}}

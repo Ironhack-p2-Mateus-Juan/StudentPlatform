@@ -1,6 +1,13 @@
+{{#if user.fullName}}
 <h1>Welcome {{user.fullName}}</h1>
+{{else}}
+<h1>Welcome {{user.email}}</h1>
+{{/if}}
 
 <p class="alert alert-light">
   <a href="/user/edit">Edit your profile</a>
 </p>
 
+<div class="new-post">
+  New post form
+</div>

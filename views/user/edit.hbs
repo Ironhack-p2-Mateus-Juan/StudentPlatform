@@ -1,29 +1,35 @@
 <h1>Edit your profile</h1>
+
 <form action="/user/edit" method="post" enctype="multipart/form-data">
-<div class="form-group">
+
+  <div class="form-group">
     <label for="fullName">Full Name</label>
-    <input type="text" class="form-control" name="fullName" value="{{user.fullName}}">
+    <input type="text" class="form-control" name="fullName" value="{{user.fullName }}">
   </div>
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" name="username" value="{{user.username}}">
+    <input type="text" class="form-control" name="username" value="{{user.username }}">
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" value="{{user.email}}">
+    <input type="email" class="form-control" name="email" value="{{user.email }}">
   </div>
   <div class="form-group">
     <label for="bootcamp">Bootcamp</label>
     <select name="bootcamp" id="bootcamp" class="form-control">
-      <option value=""></option>
+      <option value="{{user.bootcamp}}">{{user.bootcamp}}</option>
       <option value="Web">Web</option>
       <option value="UX">UX</option>
     </select>
   </div>
   <div class="form-group">
-    <figure class="figure">
-      <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
-    </figure>
+    {{#if user.imgPath }}
+      <figure class="figure">
+        <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
+      </figure>
+    {{else}}
+      <p>No image</p>
+    {{/if}}
   </div>
   <div class="form-group">
     <label for="photo">Update profile image</label>
