@@ -14,7 +14,7 @@
           <div class="form-group col-md-4 p-0">
             <label for="bootcamp">Bootcamp</label>
             <select name="bootcamp" id="bootcamp" class="form-control">
-              <option value=""></option>
+              <option value="">Current: {{user.bootcamp}}</option>
               <option value="Web">Web</option>
               <option value="UX">UX</option>
             </select>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="d-flex justify-content-between">
-          <button type="reset" class="btn btn-danger w-25">Cancel</button>
+          <a href="/user" class="btn btn-danger w-25">Cancel</a>
           <button type="submit" class="btn btn-success w-25">Save</button>
         </div>
 
@@ -50,9 +50,7 @@
           <figure class="figure profile-pic">
             <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
           </figure>
-          <form action="/remove-profile-pic/{{user.id}}" method="POST">
-            <button type="submit" class="btn btn-danger btn-sm">Remove image</button>
-          </form>
+          <a href="/user/remove-profile-pic/{{user.id}}" class="btn btn-danger btn-sm">Remove image</a>
           {{else}}
           <p>No image</p>
           {{/if}}

@@ -27,22 +27,19 @@ router.post(
   [isAdmin(), uploadCloud.single("photo")],
   (req, res, next) => {
     const id = req.params.id;
-    const body = req.body;
-    const file = req.file;
-
-    console.log("==>" + file);
 
     User.findById(id)
       .then(user => {
-        (user.fullName = body && body.fullName) ? body.fullName : user.fullName;
-        (user.username = body && body.username) ? body.username : user.username;
-        (user.email = body && body.email) ? body.email : user.email;
-        (user.bootcamp = body && body.bootcamp) ? body.bootcamp : user.bootcamp;
-        (user.imgName = file && file.originalname)
-          ? file.originalname
-          : user.imgName;
-        (user.imgPath = file && file.url) ? file.url : user.imgPath;
-
+        user.fullName = req.body.fullName ? req.body.fullName : user.fullName;
+        user.username = req.body.username ? req.body.username : user.username;
+        user.email = req.body.email ? req.body.email : user.email;
+        user.bootcamp = req.body.bootcamp ? req.body.bootcamp : user.bootcamp;
+        if (req.file) {
+          user.imgName = req.file.originalname
+            ? req.file.originalname
+            : user.imgName;
+          user.imgPath = req.file.url ? req.file.url : user.imgPath;
+        }
         user
           .save()
           .then(() => res.redirect("/user/list"))
@@ -56,18 +53,18 @@ router.post(
   "/edit",
   [ensureLoggedIn("/auth/login"), uploadCloud.single("photo")],
   (req, res, next) => {
-    const user = req.user;
-    const body = req.body;
-    const file = req.file;
+    let user = req.user;
 
-    (user.fullName = body && body.fullName) ? body.fullName : user.fullName;
-    (user.username = body && body.username) ? body.username : user.username;
-    (user.email = body && body.email) ? body.email : user.email;
-    (user.bootcamp = body && body.bootcamp) ? body.bootcamp : user.bootcamp;
-    (user.imgName = file && file.originalname)
-      ? file.originalname
-      : user.imgName;
-    (user.imgPath = file && file.url) ? file.url : user.imgPath;
+    user.fullName = req.body.fullName ? req.body.fullName : user.fullName;
+    user.username = req.body.username ? req.body.username : user.username;
+    user.email = req.body.email ? req.body.email : user.email;
+    user.bootcamp = req.body.bootcamp ? req.body.bootcamp : user.bootcamp;
+    if (req.file) {
+      user.imgName = req.file.originalname
+        ? req.file.originalname
+        : user.imgName;
+      user.imgPath = req.file.url ? req.file.url : user.imgPath;
+    }
 
     user
       .save()
@@ -90,12 +87,10 @@ router.get("/delete/:id", isAdmin(), (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/remove-profile-pic/:id", ensureLoggedIn(), (req, res, next) => {
-  user.imgPath = "";
-  user
-    .save()
+router.get("/remove-profile-pic/:id", ensureLoggedIn(), (req, res, next) => {
+  User.findByIdAndUpdate(req.user.id, { imgPath: "" })
     .then(() => {
-      res.redirect("/user/edit");
+      res.redirect("/");
     })
     .catch(() => res.render("error"));
 });
