@@ -13,9 +13,10 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
+const dbURL = process.env.DBURL;
 mongoose.Promise = Promise;
 mongoose
-  .connect("mongodb://localhost/studentplatform")
+  .connect(dbURL)
   .then(() => {
     console.log("Connected to Awesome Project!");
   })

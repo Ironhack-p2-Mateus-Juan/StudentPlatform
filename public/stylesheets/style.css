@@ -49,6 +49,9 @@ body {
 .btest {
   border: 1px solid #ca0000; }
 
+#map {
+  height: 400px; }
+
 #post-tips {
   position: absolute;
   left: 5%;
