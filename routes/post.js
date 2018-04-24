@@ -60,9 +60,10 @@ postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
     .then(publications => {
       publications.forEach(post => {
         if (post.author.id === req.user.id) {
-          userPosts.push(post);
+          userPosts.push(post)
         }
       });
+      userPosts.sort().reverse();
       res.render("posts/edit", { userPosts });
     })
     .catch(() => res.render("error"));

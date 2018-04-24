@@ -5,7 +5,7 @@
     function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       let forms = document.getElementsByClassName("needs-validation");
- 
+
       // Loop over them and prevent submission
       let validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener(
@@ -20,7 +20,7 @@
           false
         );
       });
- 
+
       // Show file name of selected image
       $(".custom-file-input").on("change", function() {
         let fileName = $(this)
@@ -35,9 +35,9 @@
     },
     false
   );
- })();
- 
- $(document).ready(() => {
+})();
+
+$(document).ready(() => {
   let date = new Date();
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
@@ -49,24 +49,30 @@
     day = "0" + day;
   }
   const today = year + "-" + month + "-" + day;
- 
+
   $("#post-type").change(() => {
     let currentType = $("#post-type").val();
- 
+
     if (currentType === "Event") {
       $("#new-post").attr("action", "/event/new");
- 
+
       $("#form-event-address").fadeIn();
       $("#form-event-date").fadeIn();
- //      $("#form-event-time").fadeIn();
- 
+      //$("#form-event-time").fadeIn();
+
+      $("#input-event-address").prop("required", true);
+      $("#input-event-date").prop("required", true);
+
       $("#input-event-date").attr("min", today);
     } else if (currentType === "Post" || currentType === "") {
       $("#new-post").attr("action", "/post/new");
- 
+
       $("#form-event-address").fadeOut();
       $("#form-event-date").fadeOut();
-//       $("#form-event-time").fadeOut();
+      //$("#form-event-time").fadeOut();
+
+      $("#input-event-address").prop("required", false);
+      $("#input-event-date").prop("required", false);
     }
   });
- });
+});

@@ -47,9 +47,10 @@
 
         <div class="form-group">
           {{#if user.imgPath }}
-          <figure class="figure">
+          <figure class="figure profile-pic">
             <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
           </figure>
+          <a href="/remove-profile-pic/{{user.id}}" class="btn btn-danger btn-sm">Remove image</a>
           {{else}}
           <p>No image</p>
           {{/if}}
@@ -59,7 +60,7 @@
           <label for="photo">Update profile image</label>
           <input type="file" class="form-control-file" name="photo" id="photo">
         </div>
-        <textarea class="form-control" rows="5" name="description" placeholder="Tell us something about yourself..." required></textarea>
+        <textarea class="form-control" rows="5" name="description" placeholder="Tell us something about yourself..."></textarea>
       </div>
 
     </form>

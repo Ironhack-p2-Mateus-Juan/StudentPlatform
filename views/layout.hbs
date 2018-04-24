@@ -66,9 +66,7 @@
                 </div>
                 <div class="modal-body">
                   <form class="needs-validation" action="/auth/login" method="POST" id="form-container" novalidate>
-
                     <div>
-
                       <label for="username">Email</label>
                       <input class="form-control" id="username" type="email" name="username" placeholder="Your email" required>
                       <div class="invalid-feedback">
@@ -93,10 +91,10 @@
           </div>
           {{/unless}} {{#if user}}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              {{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}
-              <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image">
+            <a class="nav-link dropdown-toggle pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}} {{#if user.imgPath}}
+              <img src="{{user.imgPath}}" width="50" height="50" id="profile-image" alt="Profile Image"> {{else}}
+              <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image"> {{/if}}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
               <a class="dropdown-item pt-2 pb-2" href="/user">

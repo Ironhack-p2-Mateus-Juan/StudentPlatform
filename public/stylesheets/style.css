@@ -51,6 +51,10 @@ main {
 #map {
   height: 400px; }
 
+.profile-pic {
+  max-width: 300px;
+  max-height: 300px; }
+
 .post-tips {
   position: absolute;
   left: 5%;
@@ -63,5 +67,11 @@ main {
 
 .hidden {
   display: none; }
+
+.post-container {
+  background-color: #ffffff; }
+
+#post-content {
+  white-space: pre-wrap; }
 
 /*# sourceMappingURL=style.css.map */
