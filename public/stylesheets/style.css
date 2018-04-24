@@ -1,7 +1,9 @@
 body {
   background-color: #e6e6e6;
-  padding-bottom: 80px;
   box-sizing: border-box; }
+
+main {
+  min-height: calc(100vh - 190px); }
 
 .flex-grow {
   flex: 1; }
@@ -38,12 +40,9 @@ body {
     top: 35px; }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  height: 80px;
-  color: #686868;
-  background-color: #8b8b8b52;
+  height: 82px;
+  color: #cccccc;
+  background-color: #000b2e;
   z-index: 110; }
 
 .btest {

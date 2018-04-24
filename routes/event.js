@@ -1,18 +1,19 @@
 require("dotenv").config();
 const express = require("express");
-const router = express.Router();
 const Event = require("../models/Event");
+const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
+const router = express.Router();
 
 const googleMapsClient = require("@google/maps").createClient({
   key: process.env.MAPSAPI,
   Promise: Promise
 });
 
-router.get("/", (req, res, next) => {
+router.get("/", ensureLoggedIn(), (req, res, next) => {
   res.render("events/index", { user: req.user });
 });
 
-router.post("/new", (req, res, next) => {
+router.post("/new", ensureLoggedIn(), (req, res, next) => {
   const { title, description, date, address } = req.body;
   let lat, lng;
 
