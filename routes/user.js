@@ -16,7 +16,7 @@ router.get("/edit/:id", isAdmin(), (req, res, next) => {
   const id = req.params.id;
 
   User.findById(id)
-    .then(user => res.render("user/admin/edit"))
+    .then(userEdit => res.render("user/admin/edit", { userEdit }))
     .catch(err => next(err));
 });
 
@@ -33,23 +33,25 @@ router.post(
     const password = req.body.password;
 
     User.findById(id)
-      .then(user => {
-        user.fullName = req.body.fullName ? req.body.fullName : user.fullName;
-        user.username = req.body.username ? req.body.username : user.username;
-        user.email = req.body.email ? req.body.email : user.email;
-        user.bootcamp = req.body.bootcamp ? req.body.bootcamp : user.bootcamp;
+      .then(userEdit => {
+        userEdit.fullName = req.body.fullName ? req.body.fullName : userEdit.fullName;
+        userEdit.username = req.body.username ? req.body.username : userEdit.username;
+        userEdit.email = req.body.email ? req.body.email : userEdit.email;
+        userEdit.bootcamp = req.body.bootcamp ? req.body.bootcamp : userEdit.bootcamp;
+        userEdit.isAdmin = req.body.isAdmin ? req.body.isAdmin : userEdit.isAdmin;
         if (req.file) {
-          user.imgName = req.file.originalname
+          userEdit.imgName = req.file.originalname
             ? req.file.originalname
-            : user.imgName;
-          user.imgPath = req.file.url ? req.file.url : user.imgPath;
+            : userEdit.imgName;
+            userEdit.imgPath = req.file.url ? req.file.url : userEdit.imgPath;
         }
         if (password) {
           const salt = bcrypt.genSaltSync(bcryptSalt);
           const hashPass = bcrypt.hashSync(password, salt);
-          user.password = hashPass;
+          userEdit.password = hashPass;
         }
-        user
+
+        userEdit
           .save()
           .then(() => res.redirect("/user/list"))
           .catch(err => next(err));
