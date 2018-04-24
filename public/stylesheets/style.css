@@ -51,7 +51,7 @@ main {
 #map {
   height: 400px; }
 
-#post-tips {
+.post-tips {
   position: absolute;
   left: 5%;
   top: 15%;

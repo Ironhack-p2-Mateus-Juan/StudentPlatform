@@ -1,5 +1,5 @@
 $(document).ready(() => {
-/*   // Highliting navbar buttons
+  /* Highliting navbar buttons */
   let nav = document.getElementById("main-nav");
   let btnList = nav.getElementsByClassName("nav-link");
 
@@ -14,7 +14,7 @@ $(document).ready(() => {
         this.className += " active";
       }
     });
-  } */
+  }
 
   /* User menu animation */
   $(".dropdown").on("show.bs.dropdown", function(e) {

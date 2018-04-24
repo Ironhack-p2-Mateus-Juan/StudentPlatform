@@ -35,22 +35,8 @@ const googleMapsClient = require("@google/maps").createClient({
 });
 
 router.get("/", ensureLoggedIn(), (req, res, next) => {
-
-
   res.render("event/list", { events, user: req.user });
 });
-
-/* router.post("/new", ensureLoggedIn(), (req, res, next) => {
-  const { title, description, date, address } = req.body;
-  let lat, lng;
-
-  googleMapsClient
-    .geocode({ address })
-    .asPromise()
-
-
-});
-*/
 
 router.get("/", (req, res, next) => {
   Event.find()

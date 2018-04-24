@@ -1,6 +1,6 @@
 <div class="container-fluid d-flex flex-column align-items-center p-0">
     <div class="container d-flex row justify-content-center">
-        {{#each all.publications}}
+        {{#each userPosts}}
         <div class="card col-md-8 p-2 m-1">
             {{!--
             <img class="card-img-top" src="..." alt="Card image cap"> --}}
@@ -14,13 +14,13 @@
                     <small class="text-muted">Last updated {{updated_at}} | Type: {{type}}</small>
                 </p>
                 <p class="card-text mb-0">
-                    <small class="text-muted">Writen by {{#if ../user.username}}{{../user.username}}{{else}}{{../user.email}}{{/if}}</small>
+                    <small class="text-muted">Writen by {{#if author.username}}{{author.username}}{{else}}{{author.email}}{{/if}}</small>
                 </p>
                 <div class="container-fluid text-right">
-                    <a href="/post/edit/{{this.id}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Edit this post">
+                    <a href="/post/edit/{{id}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Edit this post">
                         <i class="far fa-edit mr-2"></i>Edit
                     </a>
-                    <a href="/post/delete/{{this.id}}" class="btn btn-danger btn-sm pl-3" data-toggle="tooltip" title="Delete this post">
+                    <a href="/post/delete/{{id}}" class="btn btn-danger btn-sm pl-3" data-toggle="tooltip" title="Delete this post">
                         <i class="fas fa-trash-alt mr-2"></i>
                     </a>
                 </div>
