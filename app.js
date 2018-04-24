@@ -85,7 +85,6 @@ app.use((req, res, next) => {
 app.locals.title = "Student Platform";
 app.locals.brand = "http://localhost:3000/images/logo.png";
 app.locals.avatar = "http://localhost:3000/images/avatar.png";
-app.locals.currentUser = "";
 
 const index = require("./routes/index");
 app.use("/", index);
