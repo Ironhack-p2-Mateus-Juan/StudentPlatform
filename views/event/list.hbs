@@ -1,0 +1,20 @@
+<h1>Events</h1>
+
+<table>
+  <thead>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+{{#each events}}
+  <tr>
+    <td><a href="/event/show/{{this.id}}">{{this.title}}</a></td>
+    <td>{{this.description}}</td>
+    <td><a href="/event/edit/{{this.id}}">Edit</a></td>
+    <td><a href="/event/delete/{{this.id}}">Delete</a></td>
+  </tr>
+{{/each}}
+</tbody>
+</table>
