@@ -58,6 +58,7 @@ $(document).ready(() => {
 
       $("#form-event-address").fadeIn();
       $("#form-event-date").fadeIn();
+      $("#form-event-time").fadeIn();
 
       $("#input-event-date").attr("min", today);
     } else if (currentType === "Post" || currentType === "") {
@@ -65,6 +66,7 @@ $(document).ready(() => {
 
       $("#form-event-address").fadeOut();
       $("#form-event-date").fadeOut();
+      $("#form-event-time").fadeOut();
     }
   });
 });

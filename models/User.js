@@ -11,7 +11,7 @@ const userSchema = new Schema(
     imgPath: String,
     bootcamp: {type: String, enum: ['Web', 'UX', ""]},
     isAdmin: {type: Boolean, default: false},
-    publications: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+    //publications: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
   },
   {
     timestamps: {
