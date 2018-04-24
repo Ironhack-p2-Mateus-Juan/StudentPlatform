@@ -4,6 +4,8 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 const isAdmin = require("../middlewares/isAdmin");
 const uploadCloud = require("../config/cloudinary");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const bcryptSalt = 10;
 
 /* GET profile page */
 router.get("/", ensureLoggedIn("/auth/login"), (req, res, next) => {
@@ -22,11 +24,13 @@ router.get("/edit", ensureLoggedIn("/auth/login"), (req, res, next) => {
   res.render("user/edit");
 });
 
+//Admin route
 router.post(
   "/edit/:id",
   [isAdmin(), uploadCloud.single("photo")],
   (req, res, next) => {
     const id = req.params.id;
+    const password = req.body.password;
 
     User.findById(id)
       .then(user => {
@@ -40,6 +44,11 @@ router.post(
             : user.imgName;
           user.imgPath = req.file.url ? req.file.url : user.imgPath;
         }
+        if (password) {
+          const salt = bcrypt.genSaltSync(bcryptSalt);
+          const hashPass = bcrypt.hashSync(password, salt);
+          user.password = hashPass;
+        }
         user
           .save()
           .then(() => res.redirect("/user/list"))
@@ -49,11 +58,13 @@ router.post(
   }
 );
 
+//User route
 router.post(
   "/edit",
   [ensureLoggedIn("/auth/login"), uploadCloud.single("photo")],
   (req, res, next) => {
     let user = req.user;
+    const password = req.body.password;
 
     user.fullName = req.body.fullName ? req.body.fullName : user.fullName;
     user.username = req.body.username ? req.body.username : user.username;
@@ -64,6 +75,11 @@ router.post(
         ? req.file.originalname
         : user.imgName;
       user.imgPath = req.file.url ? req.file.url : user.imgPath;
+    }
+    if (password) {
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+      user.password = hashPass;
     }
 
     user
