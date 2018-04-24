@@ -10,13 +10,13 @@ postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
   User.find()
     .populate("publications")
     .exec((err, users) => {
-      res.render("posts/index", { users, user: req.user });
+      res.render("posts/index", { users });
     });
 });
 
 /* Create new post */
 postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
-  res.render("posts/new", { user: req.user });
+  res.render("posts/new");
 });
 
 postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
@@ -47,7 +47,7 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
       user.save();
     })
     .catch(err => {
-      res.render("error", { user: req.user });
+      res.render("error");
     });
 
   res.redirect("/post");
@@ -58,17 +58,17 @@ postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
   User.findById(req.user.id)
     .populate("publications")
     .exec((err, all) => {
-      res.render("posts/edit", { all, user: req.user });
+      res.render("posts/edit", { all });
     });
 });
 
 postRoute.get("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findById(req.params.id)
     .then(post => {
-      res.render("posts/update", { post, user: req.user });
+      res.render("posts/update", { post });
     })
     .catch(err => {
-      res.render("error", { user: req.user });
+      res.render("error");
     });
 });
 
@@ -85,7 +85,7 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
       res.redirect("/post");
     })
     .catch(err => {
-      res.render("error", { user: req.user });
+      res.render("error");
     });
 });
 
@@ -103,21 +103,21 @@ postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
           res.redirect("/post/edit");
         })
         .catch(err => {
-          res.render("error", { user: req.user });
+          res.render("error");
         });
     })
     .catch(err => {
-      res.render("error", { user: req.user });
+      res.render("error");
     });
 });
 
 postRoute.get("/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findById(req.params.id)
     .then(post => {
-      res.render("posts/read", {post, user:req.user});
+      res.render("posts/read", {post});
     })
     .catch(err => {
-      res.render("error", { user: req.user });
+      res.render("error");
     });
 });
 

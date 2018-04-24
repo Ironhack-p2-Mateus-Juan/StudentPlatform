@@ -7,7 +7,7 @@ const User = require("../models/User");
 
 /* GET profile page */
 router.get("/", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("user/profile", { user: req.user });
+  res.render("user/profile");
 });
 
 router.get("/edit/:id", isAdmin(), (req, res, next) => {
@@ -19,7 +19,7 @@ router.get("/edit/:id", isAdmin(), (req, res, next) => {
 });
 
 router.get("/edit", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("user/edit", { user: req.user });
+  res.render("user/edit");
 });
 
 router.post(

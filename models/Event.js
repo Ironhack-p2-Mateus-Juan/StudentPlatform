@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema(
   {
-    type: { type: String, default:"Event" },
+    type: { type: String, default: "Event" },
     title: { type: String, required: true },
     description: { type: String, required: true },
     location: {
@@ -11,9 +11,10 @@ const eventSchema = new Schema(
       coordinates: [Number]
     },
     date: { type: String, required: true },
-    time: {type: String, required: true},
-    author: { type: Schema.Types.ObjectId, ref: 'User' },
-    participants: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    time: { type: String, required: true },
+    author: { type: Schema.Types.ObjectId, ref: "User" },
+    participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    calendarId: { type: String }
   },
   {
     timestamps: {
@@ -23,7 +24,7 @@ const eventSchema = new Schema(
   }
 );
 
-eventSchema.index({location: "2dsphere"});
+eventSchema.index({ location: "2dsphere" });
 
-const Event = mongoose.model('Event', eventSchema);
+const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;
