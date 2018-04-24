@@ -90,4 +90,14 @@ router.get("/delete/:id", isAdmin(), (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.post("/remove-profile-pic/:id", ensureLoggedIn(), (req, res, next) => {
+  user.imgPath = "";
+  user
+    .save()
+    .then(() => {
+      res.redirect("/user/edit");
+    })
+    .catch(() => res.render("error"));
+});
+
 module.exports = router;

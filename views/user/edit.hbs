@@ -50,7 +50,9 @@
           <figure class="figure profile-pic">
             <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
           </figure>
-          <a href="/remove-profile-pic/{{user.id}}" class="btn btn-danger btn-sm">Remove image</a>
+          <form action="/remove-profile-pic/{{user.id}}" method="POST">
+            <button type="submit" class="btn btn-danger btn-sm">Remove image</button>
+          </form>
           {{else}}
           <p>No image</p>
           {{/if}}
