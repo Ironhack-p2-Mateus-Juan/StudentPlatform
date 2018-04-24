@@ -7,19 +7,19 @@ const User = require("../models/User");
 
 /* GET profile page */
 router.get("/", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("user/profile", { user: req.user });
+  res.render("user/profile");
 });
 
 router.get("/edit/:id", isAdmin(), (req, res, next) => {
   const id = req.params.id;
 
   User.findById(id)
-    .then(user => res.render("user/admin/edit", { user }))
+    .then(user => res.render("user/admin/edit"))
     .catch(err => next(err));
 });
 
 router.get("/edit", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("user/edit", { user: req.user });
+  res.render("user/edit");
 });
 
 router.post(
