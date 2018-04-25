@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700");
 @media (max-width: 767px) {
   nav li {
-    font-size: 1.2em;
+    font-size: 1.0em;
     text-align: center; }
   #sign-up-form {
     height: 550px !important; }
@@ -34,14 +34,14 @@ h5 {
 body {
   background-color: #f8f8f8;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 main {
   min-height: calc(100vh - 190px); }
 
 nav {
   font-size: 1.6em;
-  color: #B0B0B0;
+  color: #b0b0b0;
   letter-spacing: 0.07px;
   text-align: right;
   font-weight: 100; }
@@ -55,9 +55,6 @@ nav {
 
 #login-text {
   color: #00b3ff; }
-
-.flex-grow {
-  flex: 1; }
 
 .btn-primary {
   background-color: #000dca; }
@@ -78,24 +75,73 @@ nav {
   border-radius: 30px;
   border: 2px solid #cecece; }
 
+.profile-pic {
+  max-width: 300px;
+  max-height: 300px; }
+
 .dropdown-toggle::after {
   display: none; }
 
 .footer {
   height: 124px;
   color: #cccccc;
-  background-color: #2D334D;
+  background-color: #2d334d;
   z-index: 110; }
 
 .btest {
-  border: 1px solid #ca0000; }
+  border: 1px solid #ca0000 !important; }
 
 #map {
   height: 400px; }
 
-.profile-pic {
-  max-width: 300px;
-  max-height: 300px; }
+.modal-backdrop {
+  background-color: #ffffff;
+  opacity: 0.5 !important; }
+
+.modal-header {
+  border: none; }
+
+.modal-content {
+  height: 414px;
+  width: 340px;
+  padding: 35px 30px 0 30px;
+  background: #ffffff;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16), 0 4px 7px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 6px; }
+  .modal-content .close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 2em; }
+  .modal-content h5 {
+    text-align: center !important;
+    font-family: "Roboto Bold", sans-serif !important;
+    font-weight: bold;
+    font-size: 2.2em;
+    color: #2e3132; }
+
+.modal-body form label {
+  margin-top: 15px;
+  font-size: 1.8em;
+  color: #2e3132;
+  letter-spacing: 0.09px;
+  line-height: 30px; }
+
+.modal-body form input {
+  height: 50px; }
+
+.modal-body form .invalid-feedback {
+  position: absolute;
+  font-size: 1.3em; }
+
+.modal-footer {
+  margin-top: 25px; }
+  .modal-footer button {
+    height: 50px;
+    background: #00b3ff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 6px 0 rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+    border: none; }
 
 /* Admin page */
 .user-item {

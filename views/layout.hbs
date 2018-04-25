@@ -86,18 +86,18 @@
           </div>
         </nav>
       </div>
-
     </div>
+
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Log in with your account</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+          <div class="modal-header p-0 mt-2">
+            <h5 class="modal-title" id="loginModalLabel">Log in with your account</h5>
           </div>
-          <div class="modal-body">
+          <div class="modal-body p-0">
             <form class="needs-validation" action="/auth/login" method="POST" id="form-container" novalidate>
               <div>
                 <label for="username">Email</label>
@@ -110,12 +110,11 @@
                 <label for="password">Password</label>
                 <input class="form-control" id="password" type="password" name="password" placeholder="Your password" required>
                 <div class="invalid-feedback">
-                  Your password is invalid.
+                  Invalid password.
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Log in</button>
-                <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <div class="modal-footer p-0">
+                <button type="submit" class="btn btn-primary w-100">Log in</button>
               </div>
             </form>
           </div>
