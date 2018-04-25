@@ -15,7 +15,8 @@
         <div class="w-25" id="users-comments">
             {{#if post.comments}} {{#each post.comments}}
             <div class="container-fluid">
-                {{#if author.username}} {{author.username}} {{else}} {{author.email}} {{/if}} {{content}}
+                {{#isCommentAuthor this.author.id value=../user.id}} Delete Post {{/isCommentAuthor}} {{#if author.username}} {{author.username}} {{else}} {{author.email}}
+                {{/if}} {{content}}
             </div>
             {{/each}} {{/if}}
         </div>
