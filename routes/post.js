@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 const postRoute = express.Router();
 const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
+const uploadCloud = require("../config/cloudinary");
 
 /* Show all posts */
 postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
@@ -23,9 +24,11 @@ postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
   res.render("posts/new");
 });
 
-postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
+postRoute.post("/new", [ensureLoggedIn(), uploadCloud.single("image")], (req, res, next) => {
+  console.log("==> Dentro post");
   const user = req.user;
   const { title, type, content } = req.body;
+  const imagePath = req.file ? req.file.url : "";
 
   content.length > 200
     ? (thumb = content.slice(0, 200) + "...")
@@ -37,8 +40,8 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
     type,
     content,
     thumb,
-    author: user.id
-    //imagePath: req.file.filename
+    author: user.id,
+    imagePath
   });
 
   post

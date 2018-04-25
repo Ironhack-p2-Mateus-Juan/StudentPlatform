@@ -11,6 +11,7 @@
         form.addEventListener(
           "submit",
           function(event) {
+            console.log( form.checkValidity() );
             if (form.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
@@ -63,6 +64,7 @@ $(document).ready(() => {
 
       $("#input-event-address").prop("required", true);
       $("#input-event-date").prop("required", true);
+      $("#input-event-time").prop("required", true);
 
       $("#input-event-date").attr("min", today);
     } else if (currentType === "Post" || currentType === "") {
@@ -75,6 +77,7 @@ $(document).ready(() => {
 
       $("#input-event-address").prop("required", false);
       $("#input-event-date").prop("required", false);
+      $("#input-event-time").prop("required", false);
     }
   });
 });

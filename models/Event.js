@@ -14,7 +14,8 @@ const eventSchema = new Schema(
     time: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: "User" },
     participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    eventId: { type: String }
+    eventId: { type: String },
+    imagePath: { type: String }
   },
   {
     timestamps: {

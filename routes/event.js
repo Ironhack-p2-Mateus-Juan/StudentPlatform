@@ -9,6 +9,7 @@ const calendarInsert = require("../config/calendar");
 const calendarUpdate = require("../config/calendar-update");
 const calendarDelete = require("../config/calendar-delete");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
+const uploadCloud = require("../config/cloudinary");
 
 const googleMapsClient = require("@google/maps").createClient({
   key: process.env.MAPSAPI,
@@ -21,8 +22,10 @@ router.get("/", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/new", ensureLoggedIn("/event"), (req, res, next) => {
+router.post("/new", [ensureLoggedIn("/event"), uploadCloud.single("image")], (req, res, next) => {
   const { title, content, date, time, address } = req.body;
+
+  const imagePath = req.file ? req.file.url : "";
   let lat, lng;
 
   googleMapsClient
@@ -42,7 +45,8 @@ router.post("/new", ensureLoggedIn("/event"), (req, res, next) => {
         description: content,
         date,
         time,
-        location
+        location,
+        imagePath
       });
 
       newEvent
