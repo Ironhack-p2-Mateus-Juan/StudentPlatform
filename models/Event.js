@@ -6,6 +6,7 @@ const eventSchema = new Schema(
     type: { type: String, default: "Event" },
     title: { type: String, required: true },
     description: { type: String, required: true },
+    thumb: String,
     location: {
       type: { type: String },
       coordinates: [Number]

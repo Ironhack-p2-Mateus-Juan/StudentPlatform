@@ -43,6 +43,10 @@ router.post(
     const imagePath = req.file ? req.file.url : "";
     let lat, lng;
 
+    content.length > 200
+   ? (thumb = content.slice(0, 200) + "...")
+   : (thumb = content);
+
     googleMapsClient
       .geocode({ address })
       .asPromise()
@@ -58,6 +62,7 @@ router.post(
         const newEvent = new Event({
           title,
           description: content,
+          thumb,
           date,
           time,
           author,
