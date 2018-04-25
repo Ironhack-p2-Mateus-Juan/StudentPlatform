@@ -1,20 +1,22 @@
 <script>window.place = {{{location}}}</script>
-<h1>Event info</h1>
 
 {{#with event}}
-<h2>Title: {{title}}</h2>
-<h3>Description:</h3> <p>{{description}}</p>
-<p>Date: {{date}}</p>
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<p><strong>Date:</strong> {{date}}, {{time}}</p>
 {{/with}}
-<p>Address: {{address}}</p>
+<p><strong>Address:</strong> {{address}}</p>
+<p><strong>Author:</strong> {{event.author.email}}</p>
 <div id="map"></div>
 
 {{#unless go}}
   <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
 {{/unless}}
 
-<a href="/event/edit/{{event.id}}" class="btn btn-primary">Edit</a>
-<a href="/event/delete/{{event.id}}" class="btn btn-danger">Delete</a>
+{{#if canDelete}}
+  <a href="/event/edit/{{event.id}}" class="btn btn-primary">Edit</a>
+  <a href="/event/delete/{{event.id}}" class="btn btn-danger">Delete</a>
+{{/if}}
 
 {{#if event.participants}}
 <h2>Participants:</h2>
