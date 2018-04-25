@@ -1,9 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700");
 body {
-  background-color: #e6e6e6;
-  box-sizing: border-box; }
+  font: 10px  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; }
+
+.container {
+  max-width: 930px; }
+
+h1 {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  font-size: 4.8em; }
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 2.4em; }
+
+h5 {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 1.6em; }
+
+body {
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; }
 
 main {
   min-height: calc(100vh - 190px); }
+
+nav {
+  font-size: 1.6em;
+  color: #B0B0B0;
+  letter-spacing: 0.07px;
+  text-align: right;
+  font-weight: 100; }
+
+#login-text {
+  color: #00b3ff; }
 
 .flex-grow {
   flex: 1; }
@@ -12,8 +45,8 @@ main {
   background-color: #000dca; }
 
 .navbar {
-  height: 60px;
-  box-shadow: 1px 2px 8px #aaaaaa; }
+  height: 96px;
+  background-color: #ffffff !important; }
   .navbar li a {
     padding-top: 20px;
     padding-bottom: 15px; }
@@ -28,21 +61,10 @@ main {
 .dropdown-toggle::after {
   display: none; }
 
-.index {
-  height: 250px;
-  color: #ffffff;
-  background-color: #00065f; }
-
-.sign-up div {
-  background-color: #ffffff; }
-  .sign-up div .invalid-feedback {
-    left: 0;
-    top: 35px; }
-
 .footer {
-  height: 82px;
+  height: 124px;
   color: #cccccc;
-  background-color: #000b2e;
+  background-color: #2D334D;
   z-index: 110; }
 
 .btest {
@@ -64,6 +86,63 @@ main {
 .user-item-image img {
   height: 250px;
   max-width: 100%; }
+
+.index {
+  margin-top: 60px;
+  margin-bottom: 45px;
+  color: #353839; }
+
+#header-second-text {
+  color: #00b3ff; }
+
+#sign-up-form {
+  height: 379px;
+  background: #ffffff;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16), 0 4px 7px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 6px; }
+  #sign-up-form h3 {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 500;
+    font-size: 3.8em;
+    color: #2e3132;
+    letter-spacing: 0.17px; }
+  #sign-up-form .sign-up-em {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.6em;
+    color: #b0b0b0;
+    letter-spacing: 0.09px;
+    line-height: 30px; }
+  #sign-up-form .sign-up-text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    color: #2e3132;
+    letter-spacing: 0.09px;
+    line-height: 30px; }
+
+#sign-up-form-container input,
+#sign-up-form-container button {
+  height: 56px; }
+
+#sign-up-form-container button {
+  background: #00b3ff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 6px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 6px;
+  border: none; }
+
+#sign-up-form-container .invalid-feedback {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  left: 0;
+  top: 65px; }
+
+.already-account {
+  font-size: 1.2em !important; }
+
+#login-in-sign-up {
+  color: #00B3FF; }
 
 .post-tips {
   position: absolute;

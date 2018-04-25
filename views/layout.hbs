@@ -18,18 +18,18 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light pt-0 pb-0" id="main-nav">
-      <div class="collapse navbar-collapse " id="navbarNavDropdown">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-nav">
+      <div class="container collapse navbar-collapse " id="navbarNavDropdown">
         {{#if user}}
         <a class="navbar-brand" href="/post">
-          <img src={{brand}} width="30" height="30" class="d-inline-block align-top" alt="Ironahck"> Student Platform
+          <img src={{brand}} width="30" height="30" class="d-inline-block align-top" alt="Ironahck">
         </a>
         {{else}}
         <a class="navbar-brand" href="/">
-          <img src={{brand}} width="30" height="30" class="d-inline-block align-top" alt="Ironahck"> Student Platform
+          <img src={{brand}} height="80" class="d-inline-block align-top" alt="Ironahck">
         </a>
         {{/if}}
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             {{#if user}}
             <a class="nav-link" href="/user">Home</a>
@@ -55,10 +55,12 @@
         <ul class="navbar-nav">
 
           {{#unless user}}
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary pr-4 pl-4" data-toggle="modal" data-target="#loginModal">
-            Log in
-          </button>
+          <li class="nav-item">
+            <!-- Button trigger modal -->
+            <a href="#" class="nav-link" id="login-text" data-toggle="modal" data-target="#loginModal">
+              Log-in
+            </a>
+          </li>
 
           <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm" role="document">
@@ -123,14 +125,16 @@
 
   <main role="main" class="container-fluid p-0 pt-2 mb-5">
 
-    {{{body}}}
+    <div class="container p-0">
+      {{{body}}}
+    </div>
 
   </main>
 
   <footer class="footer container-fluid d-flex align-items-center">
-    <div class="container">
-      <span>Made with
-        <i class="fas fa-heart"></i> by Ironhackers.</span>
+    <div class="container text-center pt-2">
+      <h5>Made with
+        <i class="far fa-heart"></i> by Ironhackers</h5>
     </div>
   </footer>
 

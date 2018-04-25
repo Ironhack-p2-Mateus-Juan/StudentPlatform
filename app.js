@@ -61,6 +61,14 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+app.use((req, res, next) => {
+  if (req.user) {
+    app.locals.user = req.user;
+  } else {
+    app.locals.user = null;
+  }
+  next();
+});
 
 hbs.registerHelper("ifUndefined", (value, options) => {
   if (arguments.length < 2)
@@ -72,17 +80,17 @@ hbs.registerHelper("ifUndefined", (value, options) => {
   }
 });
 
-app.use((req, res, next) => {
-  if (req.user) {
-    app.locals.user = req.user;
+hbs.registerHelper('isCommentAuthor', function(conditional, options) {
+  if(conditional === options.hash.value) {
+    return options.fn(this);
   } else {
-    app.locals.user = null;
+    return options.inverse(this);
   }
-  next();
 });
 
+
 app.locals.title = "Student Platform";
-app.locals.brand = "http://localhost:3000/images/logo.png";
+app.locals.brand = "http://localhost:3000/images/logo.svg";
 app.locals.avatar = "http://localhost:3000/images/avatar.png";
 
 const index = require("./routes/index");
@@ -96,6 +104,9 @@ app.use("/user", userRoutes);
 
 const postRoutes = require("./routes/post");
 app.use("/post", postRoutes);
+
+const commentRoutes = require("./routes/comment");
+app.use("/comment", commentRoutes);
 
 const eventRoutes = require("./routes/event");
 app.use("/event", eventRoutes);

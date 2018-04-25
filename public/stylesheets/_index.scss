@@ -1,9 +1,8 @@
 /* Admin page */
-.user-item{
-
-    border: 2px solid #9c9c9c;
-    background-color: #ffffff;
-    box-sizing: border-box;
+.user-item {
+  border: 2px solid #9c9c9c;
+  background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 .user-item-image {
@@ -11,4 +10,75 @@
     height: 250px;
     max-width: 100%;
   }
+}
+
+.index {
+  margin-top: 60px;
+  margin-bottom: 45px;
+  color: #353839;
+}
+
+#header-second-text {
+  color: #00b3ff;
+}
+
+#sign-up-form {
+  height: 379px;
+  background: #ffffff;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16), 0 4px 7px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 6px;
+  h3 {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 500;
+    font-size: 3.8em;
+    color: #2e3132;
+    letter-spacing: 0.17px;
+  }
+  .sign-up-em {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.6em;
+    color: #b0b0b0;
+    letter-spacing: 0.09px;
+    line-height: 30px;
+  }
+  .sign-up-text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    color: #2e3132;
+    letter-spacing: 0.09px;
+    line-height: 30px;
+  }
+}
+
+#sign-up-form-container {
+  input,
+  button {
+    height: 56px;
+  }
+  button {
+    background: #00b3ff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 6px 0 rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+    border: none;
+  }
+}
+
+#sign-up-form-container {
+    .invalid-feedback {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-size: 1em;
+      left: 0;
+      top: 65px;
+    }
+}
+
+.already-account{
+    font-size: 1.2em !important;
+}
+
+#login-in-sign-up{
+  color: #00B3FF;
 }
