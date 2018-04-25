@@ -1,3 +1,4 @@
+<script>window.place = {{{location}}}</script>
 <h1>Event info</h1>
 
 {{#with event}}
@@ -6,10 +7,10 @@
 <p>Date: {{date}}</p>
 {{/with}}
 <p>Address: {{address}}</p>
+<div id="map"></div>
 <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
 
 {{#each event.participants}}
 <p>{{fullName}}</p>
 {{/each}}
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx_3VnqxrRjaYliRbVBbaXMALhDWRbC74"></script>

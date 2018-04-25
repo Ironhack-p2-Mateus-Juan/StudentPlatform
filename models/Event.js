@@ -14,7 +14,7 @@ const eventSchema = new Schema(
     time: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: "User" },
     participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    calendarId: { type: String }
+    eventId: { type: String }
   },
   {
     timestamps: {

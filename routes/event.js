@@ -2,9 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const Event = require("../models/Event");
+const User = require("../models/User");
 let google = require("googleapis");
 const googleAuth = require("google-auth-library");
-const calendar = require("../config/calendar");
+const calendarInsert = require("../config/calendar");
+const calendarUpdate = require("../config/calendar-update");
+const calendarDelete = require("../config/calendar-delete");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
 const googleMapsClient = require("@google/maps").createClient({
@@ -20,7 +23,6 @@ router.get("/", (req, res, next) => {
 
 router.post("/new", ensureLoggedIn("/event"), (req, res, next) => {
   const { title, content, date, time, address } = req.body;
-  console.log(date, time);
   let lat, lng;
 
   googleMapsClient
@@ -46,10 +48,9 @@ router.post("/new", ensureLoggedIn("/event"), (req, res, next) => {
       newEvent
         .save()
         .then(event => {
-          calendar(event)
+          calendarInsert(event)
             .then(id => {
-              console.log(id);
-              Event.findByIdAndUpdate(event.id, { calendarId: id })
+              Event.findByIdAndUpdate(event.id, { eventId: id })
                 .then(() => res.redirect("/event"))
                 .catch(err => next(err));
             })
@@ -66,7 +67,6 @@ router.get("/show/:id", ensureLoggedIn("/event"), (req, res, next) => {
   Event.findById(id)
     .populate("participants")
     .then(event => {
-      console.log(event);
       googleMapsClient
         .reverseGeocode({
           latlng: [event.location.coordinates[0], event.location.coordinates[1]]
@@ -74,7 +74,7 @@ router.get("/show/:id", ensureLoggedIn("/event"), (req, res, next) => {
         .asPromise()
         .then(data => data.json.results[0].formatted_address)
         .then(address => {
-          res.render("event/show", { event, address });
+          res.render("event/show", { event, location:JSON.stringify(event), address });
         })
         .catch(err => next(err));
     })
@@ -89,10 +89,16 @@ router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
     .then(event => {
       event.participants.push(idUser);
 
-      event
-        .save()
-        .then(() => res.redirect(`/event/show/${idEvent}`))
-        .catch(err => next(err));
+      event.save()
+      .then(newEvent => {
+
+        User.findById(idUser)
+        .then( user => {
+          calendarUpdate(user.email, newEvent.eventId);
+          res.redirect(`/event/show/${idEvent}`)
+        })
+      })
+      .catch(err => next(err));
     })
     .catch(err => next(err));
 });
@@ -150,9 +156,17 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
 router.get("/delete/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
-  Event.findByIdAndRemove(id)
-    .then(() => res.redirect("/event"))
-    .catch(err => next(err));
+  Event.findById(id)
+  .then( event => {
+    
+    Event.findByIdAndRemove(event._id)
+    .then( () => {
+      calendarDelete(event.eventId);
+      res.redirect("/event") 
+    })
+    .catch( err => next(err) );
+  })
+  .catch( err => next(err) );
 });
 
 module.exports = router;
