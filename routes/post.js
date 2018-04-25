@@ -5,7 +5,7 @@ const postRoute = express.Router();
 const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 
-/* Show all posts */
+// Show all posts
 postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
   Post.find()
     .populate("author")
@@ -18,7 +18,7 @@ postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-/* Create new post */
+// Create new post
 postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
   res.render("posts/new");
 });
@@ -31,7 +31,6 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
     ? (thumb = content.slice(0, 200) + "...")
     : (thumb = content);
 
-  /* ========================== Verificar **imagePath** ====================== */
   const post = new Post({
     title,
     type,
@@ -51,7 +50,7 @@ postRoute.post("/new", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-/* Update post */
+// Update post
 postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
   let userPosts = [];
 
@@ -60,7 +59,7 @@ postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
     .then(publications => {
       publications.forEach(post => {
         if (post.author.id === req.user.id) {
-          userPosts.push(post)
+          userPosts.push(post);
         }
       });
       userPosts.sort().reverse();
@@ -98,7 +97,7 @@ postRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-/* Delete post */
+// Delete post
 postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
   let postToRemove = req.params.id;
 
@@ -118,5 +117,7 @@ postRoute.get("/:id", ensureLoggedIn(), (req, res, next) => {
       res.render("error");
     });
 });
+
+
 
 module.exports = postRoute;
