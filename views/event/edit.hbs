@@ -18,12 +18,18 @@
   </div>
 
   <div class="form-group">
+    <label for="date">Time</label>
+    <input type="time" name="date" class="form-control" value="{{event.time}}">
+  </div>
+
+  <div class="form-group">
     <label for="location">Location</label>
     <input type="text" name="location" class="form-control" value="{{address}}">
   </div>
 
   <button class="btn btn-primary">Edit event</button>
-
+  <a class="btn btn-primary" href="/event/{{event.id}}">Back to event</a>
+  <a class="btn btn-danger" href="/event/delete/{{event.id}}">Delete</a>
   <script>
   </script>
 

@@ -3,7 +3,7 @@
 
 {{#with event}}
 <h2>Title: {{title}}</h2>
-<h3>Description: {{description}}</h3>
+<h3>Description:</h3> <p>{{description}}</p>
 <p>Date: {{date}}</p>
 {{/with}}
 <p>Address: {{address}}</p>
@@ -13,7 +13,11 @@
   <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
 {{/unless}}
 
+<a href="/event/edit/{{event.id}}" class="btn btn-primary">Edit</a>
+<a href="/event/delete/{{event.id}}" class="btn btn-danger">Delete</a>
+
 {{#if event.participants}}
+<h2>Participants:</h2>
 <ul>
   {{#each event.participants}}
     {{#if fullName}}

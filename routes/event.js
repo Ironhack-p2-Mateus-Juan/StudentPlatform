@@ -19,13 +19,18 @@ const googleMapsClient = require("@google/maps").createClient({
 
 router.get("/", (req, res, next) => {
   Event.find()
-    .then(events => res.render("event/list", { events }))
+    .populate("author")
+    .then(events => {
+      console.log(events);
+      events.reverse();
+      res.render("event/list", { events })
+    })
     .catch(err => next(err));
 });
 
 router.post("/new", [ensureLoggedIn("/event"), uploadCloud.single("image")], (req, res, next) => {
   const { title, content, date, time, address } = req.body;
-
+  const author = req.user.id;
   const imagePath = req.file ? req.file.url : "";
   let lat, lng;
 
@@ -46,6 +51,7 @@ router.post("/new", [ensureLoggedIn("/event"), uploadCloud.single("image")], (re
         description: content,
         date,
         time,
+        author,
         location,
         imagePath
       });
@@ -66,7 +72,7 @@ router.post("/new", [ensureLoggedIn("/event"), uploadCloud.single("image")], (re
     .catch(err => next(err));
 });
 
-router.get("/show/:id", ensureLoggedIn("/event"), (req, res, next) => {
+router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
@@ -160,7 +166,7 @@ router.get("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
 router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
-  const { title, description, date, location } = req.body;
+  const { title, description, date, time, location } = req.body;
 
   let newLocation = {};
 
@@ -180,6 +186,7 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
         title,
         description,
         date,
+        time,
         location: newLocation
       })
         .then(() => res.redirect("/event"))
@@ -191,17 +198,12 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
 router.get("/delete/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
-  Event.findById(id)
+  Event.findByIdAndRemove(id)
   .then( event => {
-    
-    Event.findByIdAndRemove(event._id)
-    .then( () => {
-      calendarDelete(event.eventId);
-      res.redirect("/event") 
-    })
-    .catch( err => next(err) );
+    calendarDelete(event.eventId);
+    res.redirect("/event");
   })
-  .catch( err => next(err) );
+  .catch( err => next(err));
 });
 
 module.exports = router;
