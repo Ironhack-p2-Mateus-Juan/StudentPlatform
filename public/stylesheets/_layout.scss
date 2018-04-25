@@ -16,6 +16,8 @@ nav {
   font-weight: 100;
   li {
     background-color: #ffffff;
+    display: flex;
+    align-items: center;
     a {
       margin-right: 10px !important;
     }
@@ -47,11 +49,19 @@ nav {
   }
 }
 
+#navbarDropdown{
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
 .active {
   background-color: rgb(223, 223, 223);
 }
 
 #profile-image {
+  width: 50px;
+  height: 50px;
   border-radius: 30px;
   border: 2px solid #cecece;
 }

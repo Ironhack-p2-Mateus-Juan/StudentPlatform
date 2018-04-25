@@ -61,12 +61,12 @@
               </li>
 
               {{/unless}} {{#if user}}
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown ml-4">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
-                  {{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}} {{#if user.imgPath}}
-                  <img src="{{user.imgPath}}" width="50" height="50" id="profile-image" alt="Profile Image"> {{else}}
-                  <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image"> {{/if}}
+                  <p class="p-0 m-0 mr-2">{{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}</p> {{#if user.imgPath}}
+                  <img src="{{user.imgPath}}" id="profile-image" alt="Profile Image"> {{else}}
+                  <img src={{avatar}} id="profile-image" alt="Profile Image"> {{/if}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item pt-2 pb-2" href="/user">

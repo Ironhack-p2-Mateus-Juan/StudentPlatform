@@ -46,7 +46,9 @@ nav {
   text-align: right;
   font-weight: 100; }
   nav li {
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    display: flex;
+    align-items: center; }
     nav li a {
       margin-right: 10px !important; }
 
@@ -68,10 +70,17 @@ nav {
   width: 80px;
   padding: 2px; }
 
+#navbarDropdown {
+  padding: 0;
+  display: flex;
+  align-items: center; }
+
 .active {
   background-color: #dfdfdf; }
 
 #profile-image {
+  width: 50px;
+  height: 50px;
   border-radius: 30px;
   border: 2px solid #cecece; }
 
