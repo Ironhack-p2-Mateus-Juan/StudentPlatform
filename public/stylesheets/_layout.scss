@@ -1,10 +1,23 @@
 body {
-  background-color: #e6e6e6;
+  background-color: #f8f8f8;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 main {
   min-height: calc(100vh - 190px);
+}
+
+nav{
+  font-size: 1.6em;
+  color: #B0B0B0;
+  letter-spacing: 0.07px;
+  text-align: right;
+  font-weight: 100;
+}
+
+#login-text {
+  color: #00b3ff;
 }
 
 .flex-grow {
@@ -16,8 +29,8 @@ main {
 }
 
 .navbar {
-  height: 60px;
-  box-shadow: 1px 2px 8px #aaaaaa;
+  height: 96px;
+  background-color: #ffffff !important;
   li a {
     padding-top: 20px;
     padding-bottom: 15px;
@@ -37,26 +50,10 @@ main {
   display: none;
 }
 
-.index {
-  height: 250px;
-  color: #ffffff;
-  background-color: #00065f;
-}
-
-.sign-up {
-  div {
-    background-color: #ffffff;
-    .invalid-feedback {
-      left: 0;
-      top: 35px;
-    }
-  }
-}
-
 .footer {
-  height: 82px;
+  height: 124px;
   color: #cccccc;
-  background-color: #000b2e;
+  background-color: #2D334D;
   z-index: 110;
 }
 
@@ -65,10 +62,10 @@ main {
 }
 
 #map {
-    height: 400px;
+  height: 400px;
 }
 
-.profile-pic{
+.profile-pic {
   max-width: 300px;
   max-height: 300px;
 }
