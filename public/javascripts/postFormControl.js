@@ -59,10 +59,11 @@ $(document).ready(() => {
       $("#form-event-address").fadeIn();
       $("#form-event-date").fadeIn();
       $("#form-event-time").fadeIn();
-      //$("#form-event-time").fadeIn();
+      $("#form-event-time").fadeIn();
 
       $("#input-event-address").prop("required", true);
       $("#input-event-date").prop("required", true);
+      $("#input-event-time").prop("required", true);
 
       $("#input-event-date").attr("min", today);
     } else if (currentType === "Post" || currentType === "") {
@@ -71,10 +72,11 @@ $(document).ready(() => {
       $("#form-event-address").fadeOut();
       $("#form-event-date").fadeOut();
       $("#form-event-time").fadeOut();
-      //$("#form-event-time").fadeOut();
+      $("#form-event-time").fadeOut();
 
       $("#input-event-address").prop("required", false);
       $("#input-event-date").prop("required", false);
+      $("#input-event-time").prop("required", false);
     }
   });
 });
