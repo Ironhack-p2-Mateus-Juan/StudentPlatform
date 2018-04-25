@@ -59,7 +59,7 @@
               {{/if}} {{/with}} {{/if}} {{#unless user}}
               <li data-toggle="collapse" data-target=".navbar-collapse.in">
                 <!-- Button trigger modal -->
-                <a href="#" class="nav-link" id="login-text" data-toggle="modal" data-target="#loginModal">
+                <a href="#" class="nav-link" id="login-btn" data-toggle="modal" data-target="#loginModal">
                   Log-in
                 </a>
               </li>
@@ -74,15 +74,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item pt-2 pb-2" href="/user">
-                    <i class="fas fa-user-circle mr-2"></i>Profile</a>
+                    <img class="icon-menu-profile mr-2">Profile</a>
                   <a class="dropdown-item pt-2 pb-2" href="/post">
-                    <i class="fas fa-th mr-2"></i>View posts</a>
+                    <img class="icon-menu-new-project mr-2">Add new project</a>
                   <a class="dropdown-item pt-2 pb-2" href="/post/new">
-                    <i class="far fa-plus-square mr-2"></i>Write new post</a>
+                    <img class="icon-menu-my-projects mr-2">My projects</a>
                   <a class="dropdown-item pt-2 pb-2" href="/post/edit">
-                    <i class="far fa-edit mr-2"></i>Edit post</a>
+                   <img class="icon-menu-new-event mr-2">Add new event</a>
                   <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                    <img class="icon-menu-logout mr-2">Log-out</a>
                 </div>
               </li>
               {{/if}}

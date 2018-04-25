@@ -28,8 +28,11 @@ nav {
   background-color: #ffffff;
 }
 
-#login-text {
+#login-btn {
   color: #00b3ff;
+  &:focus{
+    outline: 0;
+  }
 }
 
 .btn-primary {

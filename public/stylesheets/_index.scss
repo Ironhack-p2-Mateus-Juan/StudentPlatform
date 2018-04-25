@@ -81,4 +81,7 @@
 
 #login-in-sign-up{
   color: #00B3FF;
+  &:focus{
+    outline: 0;
+  }
 }
