@@ -21,7 +21,6 @@ router.get("/", (req, res, next) => {
   Event.find()
     .populate("author")
     .then(events => {
-      console.log(events);
       events.reverse();
       res.render("event/list", { events })
     })
@@ -76,9 +75,12 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
   Event.findById(id)
+    .populate("author")
     .populate("participants")
     .then(event => {
 
+      let canDelete = event.author.id === req.user.id;
+    
       let go = false;
 
       if(event.participants) {
@@ -96,7 +98,7 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
         .asPromise()
         .then(data => data.json.results[0].formatted_address)
         .then(address => {
-          res.render("event/show", { event, location:JSON.stringify(event), address, go });
+          res.render("event/show", { event, location:JSON.stringify(event), address, go, canDelete});
         })
         .catch(err => next(err));
     })
@@ -136,7 +138,7 @@ router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
             })
             .then(info => console.log(info))
             .catch(err => console.log(err));
-          res.redirect(`/event/${idEvent}`);
+          res.redirect(`/event/${idEvent}`)
         })
       })
       .catch(err => next(err));

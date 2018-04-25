@@ -180,4 +180,40 @@ nav {
 #post-content {
   white-space: pre-wrap; }
 
+/*************************************************************************/
+.card {
+  padding: 0 !important;
+  position: relative;
+  border-radius: 6px;
+  width: 30%;
+  margin: 0 1%; }
+  .card-top {
+    height: 200px; }
+    .card-top img {
+      height: 100%;
+      max-width: 100%; }
+  .card-author {
+    position: absolute;
+    top: 190px;
+    left: 15px; }
+    .card-author img {
+      width: 46px;
+      height: 46px;
+      background: white;
+      border-radius: 50%;
+      border: 2px solid #cecece; }
+  .card-title {
+    margin-left: 60px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px; }
+  .card-text {
+    color: #7d7d7d;
+    font-size: 16px; }
+  .card .read-more {
+    font-size: 16px;
+    background-color: #008EA1;
+    border-radius: 4px;
+    border-color: #008ea1; }
+
 /*# sourceMappingURL=style.css.map */
