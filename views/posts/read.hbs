@@ -1,16 +1,23 @@
 <div class="container-fluid">
     <div class="container p-0">
-    <div class="d-flex justify-content-center text-justify post-container">
-        <div class="w-75" id="post-content">
-            <h1 class="text-center">{{post.title}}</h1>
-            {{post.content}}
+        <div class="d-flex justify-content-center text-justify post-container">
+            <div class="w-75" id="post-content">
+                <h1 class="text-center">{{post.title}}</h1>
+                {{post.content}}
+            </div>
         </div>
-    </div>
         <div class="w-50" id="post-comment">
             <form action="/comment/add/{{post.id}}" method="POST">
                 <textarea minlength="10" class="form-control" rows="3" name="content" placeholder="Start writing!" required></textarea>
                 <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new comment">Comment</button>
             </form>
+        </div>
+        <div class="w-25" id="users-comments">
+            {{#if post.comments}} {{#each post.comments}}
+            <div class="container-fluid">
+                {{#if author.username}} {{author.username}} {{else}} {{author.email}} {{/if}} {{content}}
+            </div>
+            {{/each}} {{/if}}
         </div>
     </div>
 </div>

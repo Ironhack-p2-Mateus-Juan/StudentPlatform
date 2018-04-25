@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Do not set variable names as just "Comment" or "comment" because it's a reserved word!
 const userCommentSchema = new Schema(
   {
     content: { type: String, required: true },

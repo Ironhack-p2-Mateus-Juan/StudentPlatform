@@ -108,16 +108,14 @@ postRoute.get("/delete/:id", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
+// Read individual post
 postRoute.get("/:id", ensureLoggedIn(), (req, res, next) => {
   Post.findById(req.params.id)
+    .populate("author")
+    .populate({ path: "comments", populate: { path: "author" } })
     .then(post => {
       res.render("posts/read", { post });
-    })
-    .catch(err => {
-      res.render("error");
     });
 });
-
-
 
 module.exports = postRoute;
