@@ -8,9 +8,19 @@
 {{/with}}
 <p>Address: {{address}}</p>
 <div id="map"></div>
-<a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
 
-{{#each event.participants}}
-<p>{{fullName}}</p>
-{{/each}}
+{{#unless go}}
+  <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
+{{/unless}}
 
+{{#if event.participants}}
+<ul>
+  {{#each event.participants}}
+    {{#if fullName}}
+      <li>{{fullName}}</li>
+    {{else}}
+      <li>Anonymous</li>
+    {{/if}}
+  {{/each}}
+</ul>
+{{/if}}

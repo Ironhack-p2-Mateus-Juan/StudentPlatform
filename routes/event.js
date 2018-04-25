@@ -10,6 +10,7 @@ const calendarUpdate = require("../config/calendar-update");
 const calendarDelete = require("../config/calendar-delete");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
 const uploadCloud = require("../config/cloudinary");
+const nodemailer = require("nodemailer");
 
 const googleMapsClient = require("@google/maps").createClient({
   key: process.env.MAPSAPI,
@@ -71,6 +72,17 @@ router.get("/show/:id", ensureLoggedIn("/event"), (req, res, next) => {
   Event.findById(id)
     .populate("participants")
     .then(event => {
+
+      let go = false;
+
+      if(event.participants) {
+        event.participants.forEach( e => {
+          if( req.user.id == e._id ) {
+            go = true;
+          }
+        })
+      }
+
       googleMapsClient
         .reverseGeocode({
           latlng: [event.location.coordinates[0], event.location.coordinates[1]]
@@ -78,7 +90,7 @@ router.get("/show/:id", ensureLoggedIn("/event"), (req, res, next) => {
         .asPromise()
         .then(data => data.json.results[0].formatted_address)
         .then(address => {
-          res.render("event/show", { event, location:JSON.stringify(event), address });
+          res.render("event/show", { event, location:JSON.stringify(event), address, go });
         })
         .catch(err => next(err));
     })
@@ -98,7 +110,26 @@ router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
 
         User.findById(idUser)
         .then( user => {
-          calendarUpdate(user.email, newEvent.eventId);
+          //calendarUpdate(user.email, newEvent.eventId);
+
+          const transporter = nodemailer.createTransport({
+            service: "Gmail",
+            auth: {
+              user: process.env.GMAILUSER,
+              pass: process.env.GMAILPASS
+            }
+          });
+
+          transporter
+            .sendMail({
+              from: process.env.GMAILUSER,
+              to: user.email,
+              subject: "Event info",
+              html: `<h1>Welcome to ${newEvent.title}</h1>
+              <h2>Datetime: ${newEvent.date}, ${newEvent.time}</h2>`
+            })
+            .then(info => console.log(info))
+            .catch(err => console.log(err));
           res.redirect(`/event/show/${idEvent}`)
         })
       })
