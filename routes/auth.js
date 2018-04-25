@@ -13,7 +13,7 @@ authRoutes.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/user",
-    failureRedirect: "/auth/login",
+    failureRedirect: "/",
     failureFlash: true,
     passReqToCallback: true
   })
@@ -22,33 +22,34 @@ authRoutes.post(
 authRoutes.post("/signup", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  if (email === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate email and password" });
-    return;
-  }
 
   User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The email already exists" });
+      res.redirect("/");
       return;
+    } else {
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+
+      const newUser = new User({
+        email,
+        password: hashPass
+      });
+
+      newUser.save(err => {
+        if (err) {
+          res.redirect("/");
+        } else {
+          req.login(newUser, function(err) {
+            if (!err) {
+              res.redirect("/user");
+            } else {
+              res.render("error", err);
+            }
+          });
+        }
+      });
     }
-
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    const newUser = new User({
-      email,
-      password: hashPass
-    });
-
-    newUser.save(err => {
-      if (err) {
-        console.log(err);
-        res.render("auth/signup", { message: "Something went wrong" });
-      } else {
-        res.redirect("/");
-      }
-    });
   });
 });
 

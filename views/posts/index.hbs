@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center card-group">
 
   <div class="container d-flex row justify-content-center mt-3 p-0">
-    {{#each users}} {{#each publications}}
+    {{#each publication}}
     <div class="card col-md-4 p-2 mb-2">
       {{!--
       <img class="card-img-top" src="..." alt="Card image cap"> --}}
@@ -21,7 +21,7 @@
         <p class="card-text">
           {{!-- Change "email" for "username" --}}
           <small class="text-muted">Writen by
-            <b>{{#if ../username}}{{../username}}{{else}}{{../email}}{{/if}}</b>
+            <b>{{#if author.username}}{{author.username}}{{else}}{{author.email}}{{/if}}</b>
           </small>
         </p>
         <div class="container-fluid text-right">
@@ -30,6 +30,6 @@
         </div>
       </div>
     </div>
-    {{/each}} {{/each}}
+    {{/each}}
   </div>
 </div>

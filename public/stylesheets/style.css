@@ -1,7 +1,9 @@
 body {
   background-color: #e6e6e6;
-  padding-bottom: 80px;
   box-sizing: border-box; }
+
+main {
+  min-height: calc(100vh - 190px); }
 
 .flex-grow {
   flex: 1; }
@@ -38,12 +40,9 @@ body {
     top: 35px; }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  height: 80px;
-  color: #686868;
-  background-color: #8b8b8b52;
+  height: 82px;
+  color: #cccccc;
+  background-color: #000b2e;
   z-index: 110; }
 
 .btest {
@@ -52,7 +51,21 @@ body {
 #map {
   height: 400px; }
 
-#post-tips {
+.profile-pic {
+  max-width: 300px;
+  max-height: 300px; }
+
+/* Admin page */
+.user-item {
+  border: 2px solid #9c9c9c;
+  background-color: #ffffff;
+  box-sizing: border-box; }
+
+.user-item-image img {
+  height: 250px;
+  max-width: 100%; }
+
+.post-tips {
   position: absolute;
   left: 5%;
   top: 15%;
@@ -64,5 +77,11 @@ body {
 
 .hidden {
   display: none; }
+
+.post-container {
+  background-color: #ffffff; }
+
+#post-content {
+  white-space: pre-wrap; }
 
 /*# sourceMappingURL=style.css.map */

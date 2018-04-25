@@ -1,69 +1,74 @@
 body {
-    background-color: #e6e6e6;
-    padding-bottom: $footer-heigh;
-    box-sizing: border-box;
+  background-color: #e6e6e6;
+  box-sizing: border-box;
 }
 
-.flex-grow{
-    flex: 1;
+main {
+  min-height: calc(100vh - 190px);
+}
+
+.flex-grow {
+  flex: 1;
 }
 
 .btn-primary {
-    background-color: #000dca;
+  background-color: #000dca;
 }
 
 .navbar {
-    height: 60px;
-    box-shadow: 1px 2px 8px #aaaaaa;
-    li a {
-        padding-top: 20px;
-        padding-bottom: 15px;
-    }
+  height: 60px;
+  box-shadow: 1px 2px 8px #aaaaaa;
+  li a {
+    padding-top: 20px;
+    padding-bottom: 15px;
+  }
 }
 
 .active {
-    background-color: rgb(223, 223, 223);
+  background-color: rgb(223, 223, 223);
 }
 
 #profile-image {
-    border-radius: 30px;
-    border: 2px solid #cecece;
+  border-radius: 30px;
+  border: 2px solid #cecece;
 }
 
 .dropdown-toggle::after {
-    display: none
+  display: none;
 }
 
 .index {
-    height: 250px;
-    color: #ffffff;
-    background-color: #00065f;
+  height: 250px;
+  color: #ffffff;
+  background-color: #00065f;
 }
 
 .sign-up {
-    div {
-        background-color: #ffffff;
-        .invalid-feedback {
-            left: 0;
-            top: 35px;
-        }
+  div {
+    background-color: #ffffff;
+    .invalid-feedback {
+      left: 0;
+      top: 35px;
     }
+  }
 }
 
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: $footer-heigh;
-    color: #686868;
-    background-color: #8b8b8b52;
-    z-index: 110;
+  height: 82px;
+  color: #cccccc;
+  background-color: #000b2e;
+  z-index: 110;
 }
 
 .btest {
-    border: 1px solid #ca0000;
+  border: 1px solid #ca0000;
 }
 
 #map {
     height: 400px;
+}
+
+.profile-pic{
+  max-width: 300px;
+  max-height: 300px;
 }
