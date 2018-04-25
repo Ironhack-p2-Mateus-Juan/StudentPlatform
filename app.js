@@ -97,6 +97,9 @@ app.use("/user", userRoutes);
 const postRoutes = require("./routes/post");
 app.use("/post", postRoutes);
 
+const commentRoutes = require("./routes/comment");
+app.use("/comment", commentRoutes);
+
 const eventRoutes = require("./routes/event");
 app.use("/event", eventRoutes);
 
