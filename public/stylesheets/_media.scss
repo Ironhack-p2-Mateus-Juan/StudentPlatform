@@ -1,0 +1,12 @@
+// Media query variables
+@media (max-width: 820px) {
+    #sign-up-form{
+        height: 400px;
+    }
+    #sign-up-form-container{
+        flex-direction: column;
+        .col-md-4{
+            margin-bottom: 30px;
+        }
+    }
+}

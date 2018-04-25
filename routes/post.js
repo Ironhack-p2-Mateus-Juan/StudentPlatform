@@ -61,6 +61,7 @@ postRoute.get("/edit", ensureLoggedIn(), (req, res, next) => {
     .populate("author")
     .then(publications => {
       publications.forEach(post => {
+        console.log(post);
         if (post.author.id === req.user.id) {
           userPosts.push(post);
         }

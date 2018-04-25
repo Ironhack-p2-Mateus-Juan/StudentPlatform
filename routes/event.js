@@ -136,7 +136,7 @@ router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
             })
             .then(info => console.log(info))
             .catch(err => console.log(err));
-          res.redirect(`/event/show/${idEvent}`)
+          res.redirect(`/event/${idEvent}`);
         })
       })
       .catch(err => next(err));

@@ -14,6 +14,16 @@ nav{
   letter-spacing: 0.07px;
   text-align: right;
   font-weight: 100;
+li{
+  background-color: #ffffff;
+  a{
+    margin-right: 10px !important;
+  }
+}
+}
+
+#nav-container{
+  background-color: #ffffff;
 }
 
 #login-text {
@@ -31,9 +41,14 @@ nav{
 .navbar {
   height: 96px;
   background-color: #ffffff !important;
-  li a {
-    padding-top: 20px;
-    padding-bottom: 15px;
+
+}
+
+.navbar-brand{
+  img{
+    height: 80px;
+    width: 80px;
+    padding: 2px;
   }
 }
 

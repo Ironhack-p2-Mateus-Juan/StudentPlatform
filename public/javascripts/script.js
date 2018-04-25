@@ -1,21 +1,4 @@
 $(document).ready(() => {
-  /* Highliting navbar buttons */
-  let nav = document.getElementById("main-nav");
-  let btnList = nav.getElementsByClassName("nav-link");
-
-  for (let i = 0; i < btnList.length; i++) {
-    btnList[i].addEventListener("click", function() {
-      let currentActiveBtn = document.getElementsByClassName("active");
-      if (this.id !== "profileDropdown") {
-        currentActiveBtn[0].className = currentActiveBtn[0].className.replace(
-          " active",
-          ""
-        );
-        this.className += " active";
-      }
-    });
-  }
-
   /* User menu animation */
   $(".dropdown").on("show.bs.dropdown", function(e) {
     $(this)
