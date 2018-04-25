@@ -8,6 +8,7 @@ const postSchema = new Schema(
     content: { type: String, required: true },
     thumb: String,
     author: { type: Schema.Types.ObjectId, ref: "User" },
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     imagePath: String
   },
   {
