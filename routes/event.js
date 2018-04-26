@@ -45,8 +45,8 @@ router.post(
     let lat, lng;
 
     content.length > 100
-   ? (thumb = content.slice(0, 100) + "...")
-   : (thumb = content);
+      ? (thumb = content.slice(0, 100) + "...")
+      : (thumb = content);
 
     googleMapsClient
       .geocode({ address })
@@ -98,7 +98,10 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
     .then(event => {
       let isAuthor = event.author.id === req.user.id;
 
-      event.date = event.date.split("-").reverse().join(" ");
+      event.date = event.date
+        .split("-")
+        .reverse()
+        .join(" ");
 
       let go = false;
 
@@ -109,8 +112,7 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
           }
         });
       }
-
-      console.log(go);
+      
       googleMapsClient
         .reverseGeocode({
           latlng: [event.location.coordinates[0], event.location.coordinates[1]]
@@ -179,16 +181,23 @@ router.get("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
 
   Event.findById(id)
     .then(event => {
-      googleMapsClient
-        .reverseGeocode({
-          latlng: [event.location.coordinates[0], event.location.coordinates[1]]
-        })
-        .asPromise()
-        .then(data => data.json.results[0].formatted_address)
-        .then(address => {
-          res.render("event/edit", { event, address });
-        })
-        .catch(err => next(err));
+      if (req.user.id == event.author) {
+        googleMapsClient
+          .reverseGeocode({
+            latlng: [
+              event.location.coordinates[0],
+              event.location.coordinates[1]
+            ]
+          })
+          .asPromise()
+          .then(data => data.json.results[0].formatted_address)
+          .then(address => {
+            res.render("event/edit", { event, address });
+          })
+          .catch(err => next(err));
+      } else {
+        res.render("error");
+      }
     })
     .catch(err => next(err));
 });
@@ -212,14 +221,23 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
         coordinates: [lat, lng]
       };
 
-      Event.findByIdAndUpdate(id, {
-        title,
-        description,
-        date,
-        time,
-        location: newLocation
-      })
-        .then(() => res.redirect("/event"))
+      Event.findById(id)
+        .then(event => {
+          if (req.user.id == event.author) {
+            event
+              .update({
+                title,
+                description,
+                date,
+                time,
+                location: newLocation
+              })
+              .then(() => res.redirect("/event"))
+              .catch();
+          } else {
+            res.render("error");
+          }
+        })
         .catch(err => next(err));
     })
     .catch(err => next(err));
@@ -227,12 +245,15 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
 
 // Delete event
 router.get("/delete/:id", ensureLoggedIn("/event"), (req, res, next) => {
-  const id = req.params.id;
-
-  Event.findByIdAndRemove(id)
+  Event.findById(req.params.id)
     .then(event => {
-      calendarDelete(event.eventId);
-      res.redirect("/event");
+      if (req.user.id == event.author) {
+        event.remove({});
+        calendarDelete(event.eventId);
+        res.redirect("/event");
+      } else {
+        res.render("error");
+      }
     })
     .catch(err => next(err));
 });

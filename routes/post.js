@@ -98,7 +98,6 @@ postRoute.post(
 
     Post.findById(req.params.id)
       .then(post => {
-        console.log(post);
         if (req.user.id == post.author) {
           post
             .update({ title, content, imagePath, thumb })
