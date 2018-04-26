@@ -60,17 +60,6 @@
   width: 20px;
   content: url("../images/icons/location.png"); }
 
-@media (max-width: 767px) {
-  nav li {
-    font-size: 1.0em;
-    text-align: center; }
-  #sign-up-form {
-    height: 550px !important; }
-  #sign-up-form-container {
-    flex-direction: column; }
-    #sign-up-form-container .col-md-4 {
-      margin-bottom: 30px; } }
-
 body {
   font: 10px  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; }
 
@@ -461,5 +450,23 @@ nav {
       width: 100%; }
   .event #map {
     height: 200px; }
+
+@media (max-width: 767px) {
+  nav li {
+    font-size: 1.0em;
+    text-align: center; }
+  #sign-up-form {
+    height: 550px !important; }
+  #sign-up-form-container {
+    flex-direction: column; }
+    #sign-up-form-container .col-md-4 {
+      margin-bottom: 30px; }
+  .event-description,
+  .event-atendees {
+    width: 100%; }
+  .event-atendees-item {
+    margin-bottom: 20px; }
+  .event-right {
+    padding: 0 15px; } }
 
 /*# sourceMappingURL=style.css.map */
