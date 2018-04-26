@@ -14,4 +14,12 @@ $(document).ready(() => {
       .stop(true, true)
       .slideUp(200);
   });
+
+  $("#btn-edit-comment").click(() => {
+    $("#form-edit-comment").fadeIn(500);
+  });
+
+  $("#btn-cancel-edit-comment").click(() => {
+    $("#form-edit-comment").fadeOut(500);
+  });
 });

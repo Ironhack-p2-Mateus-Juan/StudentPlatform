@@ -14,9 +14,25 @@
         </div>
         <div class="w-25" id="users-comments">
             {{#if post.comments}} {{#each post.comments}}
+
             <div class="container-fluid">
-                {{#isCommentAuthor this.author.id value=../user.id}} Delete Post {{/isCommentAuthor}} {{#if author.username}} {{author.username}} {{else}} {{author.email}}
-                {{/if}} {{content}}
+                {{#isCommentAuthor this.author.id value=../user.id}}
+
+                <form action="/comment/delete/{{this.id}}" method="POST">
+                    <button class="btn btn-danger btn-sm">Delete Comment</button>
+                </form>
+
+                <button class="btn btn-warning btn-sm" id="btn-edit-comment">Edit Comment</button>
+                
+                <form action="/comment/edit/{{this.id}}" class="hidden" id="form-edit-comment" method="POST">
+                    <textarea minlength="10" class="form-control" rows="3" name="content">{{this.content}}</textarea>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning" id="btn-cancel-edit-comment">Cancel</button>
+                </form>
+
+
+
+                {{/isCommentAuthor}} {{#if author.username}} {{author.username}} {{else}} {{author.email}} {{/if}} {{content}}
             </div>
             {{/each}} {{/if}}
         </div>

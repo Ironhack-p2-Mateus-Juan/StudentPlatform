@@ -97,6 +97,9 @@ nav {
     nav li a {
       margin-right: 10px !important; }
 
+.hidden {
+  display: none; }
+
 #nav-container {
   background-color: #ffffff; }
 

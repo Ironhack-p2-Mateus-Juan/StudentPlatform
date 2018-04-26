@@ -37,4 +37,27 @@ commentRoute.post("/add/:idPost", ensureLoggedIn(), (req, res, next) => {
     });
 });
 
+// Update comment
+commentRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
+
+  const {content} = req.body;
+
+  Comments.findByIdAndUpdate(req.params.id, {content})
+    .then(() => {
+      res.redirect("back");
+    })
+    .catch(err => {
+      res.render("error");
+    });
+});
+
+// Delete comment
+commentRoute.post("/delete/:id", ensureLoggedIn(), (req, res, next) => {
+  Comments.findByIdAndRemove(req.params.id)
+    .then(() => res.redirect("back"))
+    .catch(err => {
+      res.render("error");
+    });
+});
+
 module.exports = commentRoute;
