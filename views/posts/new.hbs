@@ -2,13 +2,7 @@
     <form class="needs-validation" action="/post/new" method="POST" id="new-post" enctype="multipart/form-data" novalidate>
         <div class="form-row">
             <div class="col-md-12 mb-3 mt-5">
-                <input minlength="10" type="text" class="form-control" name="title" placeholder="Title" required>
-                <div class="invalid-feedback">
-                    Your post title should have at least 10 characters.
-                </div>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <input maxlength="25" type="text" class="form-control" name="title" placeholder="Title" required>
             </div>
             <div class="col-md-12 mb-3">
                 <textarea minlength="20" class="form-control" rows="5" name="content" placeholder="Start writing!" required></textarea>
@@ -25,5 +19,4 @@
         </div>
         <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new post">Share Post</button>
     </form>
-
 </div>

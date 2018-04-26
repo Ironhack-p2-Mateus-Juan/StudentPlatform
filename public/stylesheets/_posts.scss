@@ -23,11 +23,16 @@
   }
 }
 
+.bg-no-img{
+  background-color: #ffbb00;
+}
+
 .card {
   padding: 0 !important;
   position: relative;
   border-radius: 6px;
   max-width: 272px;
+  height: 437px;
   background: #ffffff;
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16), 0 4px 7px 0 rgba(0, 0, 0, 0.13);
   border-radius: 6px;
@@ -36,17 +41,16 @@
     height: 180px;
 
     img {
-      object-fit: cover;
+/*       object-fit: cover; */
+      max-height: 158px;
       max-width: 100%;
     }
   }
 
   &-author {
-    position: absolute;
-    top: 190px;
-    left: 15px;
-
     img {
+      position: absolute;
+      top: 170px;
       width: 46px;
       height: 46px;
       background: white;
@@ -56,7 +60,6 @@
   }
 
   &-title {
-    margin-left: 60px;
     font-weight: bold;
     font-size: 2.4em;
     line-height: 32px;

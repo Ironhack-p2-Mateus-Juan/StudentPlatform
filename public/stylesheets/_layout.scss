@@ -1,3 +1,7 @@
+.btest {
+  border: 1px solid #ca0000 !important;
+}
+
 body {
   background-color: #f8f8f8;
   box-sizing: border-box;
@@ -93,10 +97,6 @@ nav {
   color: #cccccc;
   background-color: #2d334d;
   z-index: 110;
-}
-
-.btest {
-  border: 1px solid #ca0000 !important;
 }
 
 #map {

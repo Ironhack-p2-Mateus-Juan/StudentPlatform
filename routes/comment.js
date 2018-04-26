@@ -39,10 +39,9 @@ commentRoute.post("/add/:idPost", ensureLoggedIn(), (req, res, next) => {
 
 // Update comment
 commentRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
+  const { content } = req.body;
 
-  const {content} = req.body;
-
-  Comments.findByIdAndUpdate(req.params.id, {content})
+  Comments.findByIdAndUpdate(req.params.id, { content })
     .then(() => {
       res.redirect("back");
     })
@@ -52,9 +51,26 @@ commentRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
 });
 
 // Delete comment
-commentRoute.post("/delete/:id", ensureLoggedIn(), (req, res, next) => {
+commentRoute.post("/delete/:id/:postId", ensureLoggedIn(), (req, res, next) => {
   Comments.findByIdAndRemove(req.params.id)
-    .then(() => res.redirect("back"))
+    .then(() => {
+      Post.findById(req.params.postId)
+        .then(post => {
+          console.log(post);
+          post.comments.splice(post.comments.indexOf(req.params.id, 1));
+          post
+            .save()
+            .then(() => {
+              res.redirect("back");
+            })
+            .catch(err => {
+              res.render("error");
+            });
+        })
+        .catch(err => {
+          res.render("error");
+        });
+    })
     .catch(err => {
       res.render("error");
     });

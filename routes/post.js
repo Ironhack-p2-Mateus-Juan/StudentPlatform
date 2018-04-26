@@ -29,8 +29,8 @@ postRoute.post("/new", [ensureLoggedIn(), uploadCloud.single("image")], (req, re
  const { title, type, content } = req.body;
  const imagePath = req.file ? req.file.url : "";
 
- content.length > 200
-   ? (thumb = content.slice(0, 200) + "...")
+ content.length > 100
+   ? (thumb = content.slice(0, 100) + "...")
    : (thumb = content);
 
  const post = new Post({
@@ -86,8 +86,8 @@ postRoute.post("/edit/:id", [ensureLoggedIn(), uploadCloud.single("image")], (re
  console.log(req.file);
  const update = { title, content, imagePath };
 
- content.length > 200
-   ? (thumb = content.slice(0, 200) + "...")
+ content.length > 100
+   ? (thumb = content.slice(0, 100) + "...")
    : (thumb = content);
 
  update.thumb = thumb;

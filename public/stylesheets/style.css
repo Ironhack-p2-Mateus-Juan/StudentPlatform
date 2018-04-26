@@ -20,6 +20,11 @@
   width: 20px;
   content: url("../images/icons/new_project.png"); }
 
+.icon-menu-new-event-white {
+  height: 20px;
+  width: 20px;
+  content: url("../images/icons/new_project white.png"); }
+
 .icon-menu-logout {
   height: 20px;
   width: 20px;
@@ -75,6 +80,15 @@ h2 {
 h5 {
   font-family: 'Roboto-Regular', sans-serif;
   font-size: 1.6em; }
+
+.btn-primary {
+  background-color: #00b3ff !important;
+  border: none; }
+  .btn-primary:focus {
+    outline: 0; }
+
+.btest {
+  border: 1px solid #ca0000 !important; }
 
 body {
   background-color: #f8f8f8;
@@ -150,9 +164,6 @@ nav {
   color: #cccccc;
   background-color: #2d334d;
   z-index: 110; }
-
-.btest {
-  border: 1px solid #ca0000 !important; }
 
 #map {
   height: 400px; }
@@ -297,31 +308,33 @@ nav {
   .section-title a:hover {
     text-decoration: none; }
 
+.bg-no-img {
+  background-color: #ffbb00; }
+
 .card {
   padding: 0 !important;
   position: relative;
   border-radius: 6px;
   max-width: 272px;
+  height: 437px;
   background: #ffffff;
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16), 0 4px 7px 0 rgba(0, 0, 0, 0.13);
   border-radius: 6px; }
   .card-top {
     height: 180px; }
     .card-top img {
-      object-fit: cover;
+      /*       object-fit: cover; */
+      max-height: 158px;
       max-width: 100%; }
-  .card-author {
+  .card-author img {
     position: absolute;
-    top: 190px;
-    left: 15px; }
-    .card-author img {
-      width: 46px;
-      height: 46px;
-      background: white;
-      border-radius: 50%;
-      border: 2px solid #cecece; }
+    top: 170px;
+    width: 46px;
+    height: 46px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #cecece; }
   .card-title {
-    margin-left: 60px;
     font-weight: bold;
     font-size: 2.4em;
     line-height: 32px; }
