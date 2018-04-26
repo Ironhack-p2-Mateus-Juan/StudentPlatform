@@ -14,7 +14,7 @@ const bcryptSalt = 10;
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/user",
+    successRedirect: "/post",
     failureRedirect: "/",
     failureFlash: true,
     passReqToCallback: true
@@ -68,7 +68,7 @@ authRoutes.post("/signup", (req, res, next) => {
 
           req.login(newUser, function(err) {
             if (!err) {
-              res.redirect("/user");
+              res.redirect("/");
             } else {
               res.render("error", err);
             }

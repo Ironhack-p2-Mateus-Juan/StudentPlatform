@@ -38,21 +38,21 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
+              <li class="nav-item user-menu-dropdown">
                 {{#if user}}
-                <a class="nav-link" href="/user">Home</a>
+                <a class="nav-link" href="/post">Home</a>
                 {{else}}
                 <a class="nav-link" href="/">Home</a>
                 {{/if}}
               </li>
 
               {{#if user}}
-              <li class="nav-item">
+              <li class="nav-item user-menu-dropdown">
                 <a class="nav-link" href="/event">Events</a>
               </li>
               {{/if}}
 
-              <li class="nav-item">
+              <li class="nav-item user-menu-dropdown">
                 <a class="nav-link" href="/about">About</a>
               </li>
               {{#if user}} {{#with user}} {{#if isAdmin}}
@@ -60,7 +60,7 @@
                 <a class="nav-link" href="/user/list">View Users</a>
               </li>
               {{/if}} {{/with}} {{/if}} {{#unless user}}
-              <li data-toggle="collapse" data-target=".navbar-collapse.in">
+              <li data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn-nav">
                 <!-- Button trigger modal -->
                 <a href="#" class="nav-link" id="login-btn" data-toggle="modal" data-target="#loginModal">
                   Log-in
@@ -68,7 +68,7 @@
               </li>
 
               {{/unless}} {{#if user}}
-              <li class="nav-item dropdown ml-2">
+              <li class="nav-item dropdown ml-2 user-menu-dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
                   <p class="p-0 m-0 mr-2">{{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}</p> {{#if user.imgPath}}
@@ -83,10 +83,42 @@
                   <a class="dropdown-item pt-2 pb-2" href="/post/edit">
                     <img class="icon-menu-my-projects mr-2">My projects</a>
                   <a class="dropdown-item pt-2 pb-2" href="/event/new">
-                   <img class="icon-menu-new-event mr-2">Add new event</a>
+                    <img class="icon-menu-new-event mr-2">Add new event</a>
                   <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
                     <img class="icon-menu-logout mr-2">Log-out</a>
                 </div>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/post">
+                  Home</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/event">
+                  Events</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/about">
+                  About</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/user">
+                  Profile</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/post/new">
+                  Add new project</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/post/edit">
+                  My projects</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/event/new">
+                  Add new event</a>
+              </li>
+              <li class="nav-item user-menu">
+                <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
+                  Log-out</a>
               </li>
               {{/if}}
             </ul>

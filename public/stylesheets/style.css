@@ -91,6 +91,9 @@ h5 {
   .btn-primary:focus {
     outline: 0; }
 
+.user-menu {
+  display: none; }
+
 .btest {
   border: 1px solid #ca0000 !important; }
 
@@ -468,9 +471,20 @@ nav {
     height: 200px; }
 
 @media (max-width: 767px) {
-  nav li {
-    font-size: 1.0em;
-    text-align: center; }
+  nav {
+    text-align: left; }
+    nav li {
+      font-size: 1.2em;
+      display: flex;
+      height: 50px; }
+  #login-btn-nav {
+    display: flex;
+    justify-content: center; }
+  .user-menu-dropdown {
+    display: none; }
+  .user-menu {
+    display: inline-block;
+    z-index: 1000; }
   #sign-up-form {
     height: 550px !important; }
   #sign-up-form-container {
