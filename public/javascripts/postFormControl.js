@@ -11,7 +11,7 @@
         form.addEventListener(
           "submit",
           function(event) {
-            console.log( form.checkValidity() );
+            console.log(form.checkValidity());
             if (form.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
@@ -50,34 +50,5 @@ $(document).ready(() => {
     day = "0" + day;
   }
   const today = year + "-" + month + "-" + day;
-
-  $("#post-type").change(() => {
-    let currentType = $("#post-type").val();
-
-    if (currentType === "Event") {
-      $("#new-post").attr("action", "/event/new");
-
-      $("#form-event-address").fadeIn();
-      $("#form-event-date").fadeIn();
-      $("#form-event-time").fadeIn();
-      $("#form-event-time").fadeIn();
-
-      $("#input-event-address").prop("required", true);
-      $("#input-event-date").prop("required", true);
-      $("#input-event-time").prop("required", true);
-
-      $("#input-event-date").attr("min", today);
-    } else if (currentType === "Post" || currentType === "") {
-      $("#new-post").attr("action", "/post/new");
-
-      $("#form-event-address").fadeOut();
-      $("#form-event-date").fadeOut();
-      $("#form-event-time").fadeOut();
-      $("#form-event-time").fadeOut();
-
-      $("#input-event-address").prop("required", false);
-      $("#input-event-date").prop("required", false);
-      $("#input-event-time").prop("required", false);
-    }
-  });
+  $("#input-event-date").attr("min", today);
 });

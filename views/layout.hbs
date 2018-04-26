@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
     crossorigin="anonymous">
+
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
     crossorigin="anonymous">
 
@@ -18,109 +19,112 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-nav">
-      <div class="container collapse navbar-collapse " id="navbarNavDropdown">
-        {{#if user}}
-        <a class="navbar-brand" href="/post">
-          <img src={{brand}} width="30" height="30" class="d-inline-block align-top" alt="Ironahck">
-        </a>
-        {{else}}
-        <a class="navbar-brand" href="/">
-          <img src={{brand}} height="80" class="d-inline-block align-top" alt="Ironahck">
-        </a>
-        {{/if}}
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            {{#if user}}
-            <a class="nav-link" href="/user">Home</a>
-            {{else}}
-            <a class="nav-link" href="/">Home</a>
+    <div class="container-fluid p-0" id="nav-container">
+      <div class="container p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-0" id="main-nav">
+          <a class="navbar-brand" href={{#if user}} "/post"{{else}} "/"{{/if}}>
+            <img src={{brand}} alt="Ironahck">
+          </a>
+          <button class="navbar-toggler mr-2 {{#if user}}p-0{{/if}}" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            {{#if user}} {{#if user.imgPath}}
+            <img src="{{user.imgPath}}" id="profile-image" alt="Profile Image"> {{else}}
+            <img src={{avatar}} id="profile-image" alt="Profile Image"> {{/if}} {{else}}
+            <span class="navbar-toggler-icon"></span>
             {{/if}}
-          </li>
-          {{#if user}}
-          <li class="nav-item">
-            <a class="nav-link" href="/event">Events</a>
-          </li>
-          {{/if}}
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          {{#if user}} {{#with user}} {{#if isAdmin}}
-          <li class="nav-item">
-            <a class="nav-link" href="/user/list">View Users</a>
-          </li>
-          {{/if}} {{/with}} {{/if}}
-        </ul>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                {{#if user}}
+                <a class="nav-link" href="/user">Home</a>
+                {{else}}
+                <a class="nav-link" href="/">Home</a>
+                {{/if}}
+              </li>
 
-        <ul class="navbar-nav">
+              {{#if user}}
+              <li class="nav-item">
+                <a class="nav-link" href="/event">Events</a>
+              </li>
+              {{/if}}
 
-          {{#unless user}}
-          <li class="nav-item">
-            <!-- Button trigger modal -->
-            <a href="#" class="nav-link" id="login-text" data-toggle="modal" data-target="#loginModal">
-              Log-in
-            </a>
-          </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              {{#if user}} {{#with user}} {{#if isAdmin}}
+              <li class="nav-item">
+                <a class="nav-link" href="/user/list">View Users</a>
+              </li>
+              {{/if}} {{/with}} {{/if}} {{#unless user}}
+              <li data-toggle="collapse" data-target=".navbar-collapse.in">
+                <!-- Button trigger modal -->
+                <a href="#" class="nav-link" id="login-btn" data-toggle="modal" data-target="#loginModal">
+                  Log-in
+                </a>
+              </li>
 
-          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="loginModalLabel">Log in with your account</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+              {{/unless}} {{#if user}}
+              <li class="nav-item dropdown ml-2">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <p class="p-0 m-0 mr-2">{{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}}</p> {{#if user.imgPath}}
+                  <img src="{{user.imgPath}}" id="profile-image" alt="Profile Image"> {{else}}
+                  <img src={{avatar}} id="profile-image" alt="Profile Image"> {{/if}}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right mr-2 mt-2" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item pt-2 pb-2" href="/user">
+                    <img class="icon-menu-profile mr-2">Profile</a>
+                  <a class="dropdown-item pt-2 pb-2" href="/post/new">
+                    <img class="icon-menu-new-project mr-2">Add new project</a>
+                  <a class="dropdown-item pt-2 pb-2" href="/post/edit">
+                    <img class="icon-menu-my-projects mr-2">My projects</a>
+                  <a class="dropdown-item pt-2 pb-2" href="/event/new">
+                   <img class="icon-menu-new-event mr-2">Add new event</a>
+                  <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
+                    <img class="icon-menu-logout mr-2">Log-out</a>
                 </div>
-                <div class="modal-body">
-                  <form class="needs-validation" action="/auth/login" method="POST" id="form-container" novalidate>
-                    <div>
-                      <label for="username">Email</label>
-                      <input class="form-control" id="username" type="email" name="username" placeholder="Your email" required>
-                      <div class="invalid-feedback">
-                        Invalid email.
-                      </div>
-                    </div>
-                    <div class="mt-2">
-                      <label for="password">Password</label>
-                      <input class="form-control" id="password" type="password" name="password" placeholder="Your password" required>
-                      <div class="invalid-feedback">
-                        Your password is invalid.
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Log in</button>
-                      <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </form>
+              </li>
+              {{/if}}
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-header p-0 mt-2">
+            <h5 class="modal-title" id="loginModalLabel">Log in with your account</h5>
+          </div>
+          <div class="modal-body p-0">
+            <form class="needs-validation" action="/auth/login" method="POST" id="form-container" novalidate>
+              <div>
+                <label for="username">Email</label>
+                <input class="form-control" id="username" type="email" name="username" placeholder="Your email" required>
+                <div class="invalid-feedback">
+                  Invalid email.
                 </div>
               </div>
-            </div>
+              <div class="mt-2">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" type="password" name="password" placeholder="Your password" required>
+                <div class="invalid-feedback">
+                  Invalid password.
+                </div>
+              </div>
+              <div class="modal-footer p-0">
+                <button type="submit" class="btn btn-primary w-100">Log in</button>
+              </div>
+            </form>
           </div>
-          {{/unless}} {{#if user}}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle pt-0 pb-0" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{#if user.username}}{{user.username}}{{else}}{{user.email}}{{/if}} {{#if user.imgPath}}
-              <img src="{{user.imgPath}}" width="50" height="50" id="profile-image" alt="Profile Image"> {{else}}
-              <img src={{avatar}} width="50" height="50" id="profile-image" alt="Profile Image"> {{/if}}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-              <a class="dropdown-item pt-2 pb-2" href="/user">
-                <i class="fas fa-user-circle mr-2"></i>Profile</a>
-              <a class="dropdown-item pt-2 pb-2" href="/post">
-                <i class="fas fa-th mr-2"></i>View posts</a>
-              <a class="dropdown-item pt-2 pb-2" href="/post/new">
-                <i class="far fa-plus-square mr-2"></i>Write new post</a>
-              <a class="dropdown-item pt-2 pb-2" href="/post/edit">
-                <i class="far fa-edit mr-2"></i>Edit post</a>
-              <a class="dropdown-item pt-2 pb-2" href="/auth/logout">
-                <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
-            </div>
-          </li>
-          {{/if}}
-
-        </ul>
+        </div>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main role="main" class="container-fluid p-0 pt-2 mb-5">

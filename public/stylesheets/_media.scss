@@ -1,0 +1,18 @@
+// Media query variables
+@media (max-width: 767px) {
+    nav{
+        li{
+            font-size: 1.0em;
+            text-align: center;
+        }
+    }
+    #sign-up-form{
+        height: 550px !important;
+    }
+    #sign-up-form-container{
+        flex-direction: column;
+        .col-md-4{
+            margin-bottom: 30px;
+        }
+    }
+}

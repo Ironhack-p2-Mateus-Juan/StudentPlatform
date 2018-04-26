@@ -8,7 +8,7 @@
 
           <div class="form-group col-md-7 p-0">
             <label for="username">{{#if user.username}}{{user.username}}{{else}}New username{{/if}}</label>
-            <input type="text" class="form-control" name="username" value="{{#if user.username}}{{user.username}}{{/if}}" placeholder="Username">
+            <input type="text" maxlength="25" class="form-control" name="username" value="{{#if user.username}}{{user.username}}{{/if}}" placeholder="Username">
           </div>
 
           <div class="form-group col-md-4 p-0">

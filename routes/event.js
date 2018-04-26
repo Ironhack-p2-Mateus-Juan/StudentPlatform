@@ -16,61 +16,78 @@ const googleMapsClient = require("@google/maps").createClient({
   key: process.env.MAPSAPI,
   Promise: Promise
 });
-  
+
+// Show all events
 router.get("/", (req, res, next) => {
   Event.find()
     .populate("author")
     .then(events => {
       events.reverse();
-      res.render("event/list", { events })
+      res.render("event/list", { events });
     })
     .catch(err => next(err));
 });
 
-router.post("/new", [ensureLoggedIn("/event"), uploadCloud.single("image")], (req, res, next) => {
-  const { title, content, date, time, address } = req.body;
-  const author = req.user.id;
-  const imagePath = req.file ? req.file.url : "";
-  let lat, lng;
-
-  googleMapsClient
-    .geocode({ address })
-    .asPromise()
-    .then(data => {
-      lat = data.json.results[0].geometry.viewport.northeast.lat;
-      lng = data.json.results[0].geometry.viewport.northeast.lng;
-
-      const location = {
-        type: "Point",
-        coordinates: [lat, lng]
-      };
-
-      const newEvent = new Event({
-        title,
-        description: content,
-        date,
-        time,
-        author,
-        location,
-        imagePath
-      });
-
-      newEvent
-        .save()
-        .then(event => {
-          calendarInsert(event)
-            .then(id => {
-              Event.findByIdAndUpdate(event.id, { eventId: id })
-                .then(() => res.redirect("/event"))
-                .catch(err => next(err));
-            })
-            .catch(err => next(err));
-        })
-        .catch(err => next(err));
-    })
-    .catch(err => next(err));
+// New event page
+router.get("/new", (req, res, next) => {
+  res.render("event/new");
 });
 
+// Save new event
+router.post(
+  "/new",
+  [ensureLoggedIn("/event"), uploadCloud.single("image")],
+  (req, res, next) => {
+    const { title, content, date, time, address } = req.body;
+    const author = req.user.id;
+    const imagePath = req.file ? req.file.url : "";
+    let lat, lng;
+
+    content.length > 200
+   ? (thumb = content.slice(0, 200) + "...")
+   : (thumb = content);
+
+    googleMapsClient
+      .geocode({ address })
+      .asPromise()
+      .then(data => {
+        lat = data.json.results[0].geometry.viewport.northeast.lat;
+        lng = data.json.results[0].geometry.viewport.northeast.lng;
+
+        const location = {
+          type: "Point",
+          coordinates: [lat, lng]
+        };
+
+        const newEvent = new Event({
+          title,
+          description: content,
+          thumb,
+          date,
+          time,
+          author,
+          location,
+          imagePath
+        });
+
+        newEvent
+          .save()
+          .then(event => {
+            calendarInsert(event)
+              .then(id => {
+                Event.findByIdAndUpdate(event.id, { eventId: id })
+                  .then(() => res.redirect("/event"))
+                  .catch(err => next(err));
+              })
+              .catch(err => next(err));
+          })
+          .catch(err => next(err));
+      })
+      .catch(err => next(err));
+  }
+);
+
+// Show single event
 router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
@@ -78,17 +95,16 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
     .populate("author")
     .populate("participants")
     .then(event => {
-
       let canDelete = event.author.id === req.user.id;
-    
+
       let go = false;
 
-      if(event.participants) {
-        event.participants.forEach( e => {
-          if( req.user.id == e._id ) {
+      if (event.participants) {
+        event.participants.forEach(e => {
+          if (req.user.id == e._id) {
             go = true;
           }
-        })
+        });
       }
 
       googleMapsClient
@@ -98,13 +114,20 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
         .asPromise()
         .then(data => data.json.results[0].formatted_address)
         .then(address => {
-          res.render("event/show", { event, location:JSON.stringify(event), address, go, canDelete});
+          res.render("event/show", {
+            event,
+            location: JSON.stringify(event),
+            address,
+            go,
+            canDelete
+          });
         })
         .catch(err => next(err));
     })
     .catch(err => next(err));
 });
 
+// Insert participants to event
 router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
   const idEvent = req.params.event;
   const idUser = req.params.user;
@@ -113,35 +136,34 @@ router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
     .then(event => {
       event.participants.push(idUser);
 
-      event.save()
-      .then(newEvent => {
+      event
+        .save()
+        .then(newEvent => {
+          User.findById(idUser).then(user => {
+            //calendarUpdate(user.email, newEvent.eventId);
 
-        User.findById(idUser)
-        .then( user => {
-          //calendarUpdate(user.email, newEvent.eventId);
+            const transporter = nodemailer.createTransport({
+              service: "Gmail",
+              auth: {
+                user: process.env.GMAILUSER,
+                pass: process.env.GMAILPASS
+              }
+            });
 
-          const transporter = nodemailer.createTransport({
-            service: "Gmail",
-            auth: {
-              user: process.env.GMAILUSER,
-              pass: process.env.GMAILPASS
-            }
-          });
-
-          transporter
-            .sendMail({
-              from: process.env.GMAILUSER,
-              to: user.email,
-              subject: "Event info",
-              html: `<h1>Welcome to ${newEvent.title}</h1>
+            transporter
+              .sendMail({
+                from: process.env.GMAILUSER,
+                to: user.email,
+                subject: "Event info",
+                html: `<h1>Welcome to ${newEvent.title}</h1>
               <h2>Datetime: ${newEvent.date}, ${newEvent.time}</h2>`
-            })
-            .then(info => console.log(info))
-            .catch(err => console.log(err));
-          res.redirect(`/event/${idEvent}`)
+              })
+              .then(info => console.log(info))
+              .catch(err => console.log(err));
+            res.redirect(`/event/${idEvent}`);
+          });
         })
-      })
-      .catch(err => next(err));
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
@@ -197,15 +219,16 @@ router.post("/edit/:id", ensureLoggedIn("/event"), (req, res, next) => {
     .catch(err => next(err));
 });
 
+// Delete event
 router.get("/delete/:id", ensureLoggedIn("/event"), (req, res, next) => {
   const id = req.params.id;
 
   Event.findByIdAndRemove(id)
-  .then( event => {
-    calendarDelete(event.eventId);
-    res.redirect("/event");
-  })
-  .catch( err => next(err));
+    .then(event => {
+      calendarDelete(event.eventId);
+      res.redirect("/event");
+    })
+    .catch(err => next(err));
 });
 
 module.exports = router;
