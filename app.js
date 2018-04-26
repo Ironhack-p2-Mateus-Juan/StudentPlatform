@@ -18,7 +18,7 @@ mongoose.Promise = Promise;
 mongoose
   .connect(dbURL)
   .then(() => {
-    console.log("Connected to Awesome Project!");
+    console.log(`Connected to Mongo on ${dbURL}`);
   })
   .catch(err => {
     console.error("Error connecting to mongo", err);
@@ -90,8 +90,8 @@ hbs.registerHelper('isCommentAuthor', function(conditional, options) {
 
 
 app.locals.title = "Student Platform";
-app.locals.brand = "http://localhost:3000/images/logo.svg";
-app.locals.avatar = "http://localhost:3000/images/avatar.png";
+app.locals.brand = "https://ih-studentplatform.herokuapp.com/images/logo.svg";
+app.locals.avatar = "https://ih-studentplatform.herokuapp.com/images/avatar.png";
 
 const index = require("./routes/index");
 app.use("/", index);
