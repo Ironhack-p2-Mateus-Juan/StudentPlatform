@@ -16,7 +16,7 @@ const googleMapsClient = require("@google/maps").createClient({
   key: process.env.MAPSAPI,
   Promise: Promise
 });
-
+  
 router.get("/", (req, res, next) => {
   Event.find()
     .populate("author")
