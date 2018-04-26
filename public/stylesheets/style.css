@@ -340,7 +340,6 @@ nav {
     height: 180px; }
     .card-top img {
       object-fit: cover;
-      /* max-height: 158px; */
       max-width: 100%; }
   .card-author img {
     position: absolute;
@@ -356,7 +355,8 @@ nav {
     line-height: 32px; }
   .card-text {
     color: #2e3132;
-    font-size: 1.6em; }
+    font-size: 1.6em;
+    word-wrap: break-word; }
   .card .read-more {
     font-size: 1.6em;
     background-color: #008ea1;

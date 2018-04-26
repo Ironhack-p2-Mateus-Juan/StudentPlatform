@@ -55,7 +55,6 @@
 
     img {
       object-fit: cover;
-      /* max-height: 158px; */
       max-width: 100%;
     }
   }
@@ -77,10 +76,11 @@
     font-size: 2.4em;
     line-height: 32px;
   }
-
+  
   &-text {
     color: #2e3132;
     font-size: 1.6em;
+    word-wrap: break-word;
   }
 
   .read-more {
