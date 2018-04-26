@@ -4,10 +4,9 @@ var google = require("googleapis");
 google = google.google;
 var OAuth2 = google.auth.OAuth2;
 
-var TOKEN_DIR ='./calendar-env/';
-var TOKEN_PATH = TOKEN_DIR + "calendar_nodejs_quickstart.json";
+var TOKEN_PATH = process.env.calendar_nodejs_quickstart;
 
-const googleSecrets = JSON.parse(fs.readFileSync(TOKEN_DIR + "client_secret.json"))
+const googleSecrets = JSON.parse(process.env.client_secret)
   .installed;
 var oauth2Client = new OAuth2(
   googleSecrets.client_id,
@@ -15,8 +14,7 @@ var oauth2Client = new OAuth2(
   googleSecrets.redirect_uris[0]
 );
 
-const token = fs.readFileSync(TOKEN_PATH);
-oauth2Client.setCredentials(JSON.parse(token));
+oauth2Client.setCredentials(JSON.parse(TOKEN_PATH));
 
 var calendar = google.calendar("v3");
 
