@@ -3,7 +3,20 @@
 }
 
 #post-content {
-  white-space: pre-wrap;
+  p {
+    font-size: 16px;
+  }
+}
+
+.post-comment {
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  background: white;
+}
+
+.btn-comment {
+  display: inline-block
 }
 
 /*************************************************************************/
@@ -41,8 +54,8 @@
     height: 180px;
 
     img {
-/*       object-fit: cover; */
-      max-height: 158px;
+      object-fit: cover;
+      /* max-height: 158px; */
       max-width: 100%;
     }
   }

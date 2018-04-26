@@ -1,31 +1,50 @@
 // Media query variables
 @media (max-width: 767px) {
-    nav{
-        li{
-            font-size: 1.0em;
-            text-align: center;
-        }
+  nav {
+    li {
+      font-size: 1em;
+      text-align: center;
     }
-    #sign-up-form{
-        height: 550px !important;
+  }
+  #sign-up-form {
+    height: 550px !important;
+  }
+  #sign-up-form-container {
+    flex-direction: column;
+    .col-md-4 {
+      margin-bottom: 30px;
     }
-    #sign-up-form-container{
-        flex-direction: column;
-        .col-md-4{
-            margin-bottom: 30px;
-        }
-    }
+  }
 
-    .event-description,
-    .event-atendees {
-        width: 100%;
-    }
+  .container {
+    margin: 0;
+  }
 
-    .event-atendees-item {
-        margin-bottom: 20px;
-    }
+  .card {
+    margin: 0 auto;
+  }
 
-    .event-right {
-        padding: 0 15px;
+  .event-description,
+  .event-atendees {
+    width: 100%;
+  }
+
+  .event-atendees-item {
+    margin-bottom: 20px;
+  }
+
+  .event-right {
+    padding: 0 15px;
+  }
+
+  #post-content {
+    width: 90% !important;
+    h1 {
+      text-align: center;
     }
+  }
+
+  .post-comment {
+    width: 90% !important;
+  }
 }

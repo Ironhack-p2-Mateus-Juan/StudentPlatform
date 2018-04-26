@@ -2,31 +2,35 @@
     <div class="container p-0">
         <div class="d-flex justify-content-center text-justify post-container">
             <div class="w-75" id="post-content">
-                <h1 class="text-center">{{post.title}}</h1>
-                {{post.content}}
+                <h1>{{post.title}}</h1>
+                <p>{{post.content}}</p>
             </div>
         </div>
-        <div class="w-50" id="post-comment">
+        <div class="w-75 post-comment" id="post-comment">
             <form action="/comment/add/{{post.id}}" method="POST">
                 <textarea minlength="10" class="form-control" rows="3" name="content" placeholder="Start writing!" required></textarea>
                 <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Create new comment">Comment</button>
             </form>
         </div>
-        <div class="w-25" id="users-comments">
+        <div class="w-75 post-comment" id="users-comments">
             {{#if post.comments}} {{#each post.comments}}
 
             <div class="container-fluid">
+                <p>{{content}}</p>
+                <hr>
+                <p>{{#if author.username}} {{author.username}} {{else}} {{author.email}} {{/if}} </p>
                 {{#isCommentAuthor this.author.id value=../user.id}}
-                <form action="/comment/delete/{{this.id}}/{{../post.id}}" method="POST">
+                <form action="/comment/delete/{{this.id}}/{{../post.id}}" method="POST" class="btn-comment">
                     <button class="btn btn-danger btn-sm">Delete Comment</button>
                 </form>
-                <button class="btn btn-warning btn-sm" id="btn-edit-comment">Edit Comment</button>
+                <button class="btn btn-warning btn-sm btn-comment" id="btn-edit-comment">Edit Comment</button>
                 <form action="/comment/edit/{{this.id}}" class="hidden" id="form-edit-comment" method="POST">
                     <textarea minlength="10" class="form-control" rows="3" name="content">{{this.content}}</textarea>
                     <button type="submit" class="btn btn-success">Save</button>
                     <button type="reset" class="btn btn-warning" id="btn-cancel-edit-comment">Cancel</button>
                 </form>
-                {{/isCommentAuthor}} {{#if author.username}} {{author.username}} {{else}} {{author.email}} {{/if}} {{content}}
+                {{/isCommentAuthor}} 
+                
             </div>
             {{/each}} {{/if}}
         </div>

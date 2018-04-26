@@ -297,8 +297,17 @@ nav {
 .post-container {
   background-color: #ffffff; }
 
-#post-content {
-  white-space: pre-wrap; }
+#post-content p {
+  font-size: 16px; }
+
+.post-comment {
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  background: white; }
+
+.btn-comment {
+  display: inline-block; }
 
 /*************************************************************************/
 .section-title h1 {
@@ -327,8 +336,8 @@ nav {
   .card-top {
     height: 180px; }
     .card-top img {
-      /*       object-fit: cover; */
-      max-height: 158px;
+      object-fit: cover;
+      /* max-height: 158px; */
       max-width: 100%; }
   .card-author img {
     position: absolute;
@@ -469,7 +478,7 @@ nav {
 
 @media (max-width: 767px) {
   nav li {
-    font-size: 1.0em;
+    font-size: 1em;
     text-align: center; }
   #sign-up-form {
     height: 550px !important; }
@@ -477,12 +486,22 @@ nav {
     flex-direction: column; }
     #sign-up-form-container .col-md-4 {
       margin-bottom: 30px; }
+  .container {
+    margin: 0; }
+  .card {
+    margin: 0 auto; }
   .event-description,
   .event-atendees {
     width: 100%; }
   .event-atendees-item {
     margin-bottom: 20px; }
   .event-right {
-    padding: 0 15px; } }
+    padding: 0 15px; }
+  #post-content {
+    width: 90% !important; }
+    #post-content h1 {
+      text-align: center; }
+  .post-comment {
+    width: 90% !important; } }
 
 /*# sourceMappingURL=style.css.map */
