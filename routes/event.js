@@ -136,9 +136,9 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
 });
 
 // Insert participants to event
-router.get("/go/:event", ensureLoggedIn("/event"), (req, res, next) => {
+router.get("/go/:event/:user", ensureLoggedIn("/event"), (req, res, next) => {
   const idEvent = req.params.event;
-  const idUser = req.user.id;
+  const idUser = req.params.user;
 
   Event.findById(idEvent)
     .then(event => {
