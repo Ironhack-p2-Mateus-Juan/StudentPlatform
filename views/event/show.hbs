@@ -1,32 +1,76 @@
-<script>window.place = {{{location}}}</script>
+<script>window.place = {{{ location }}}</script>
 
-{{#with event}}
-<h1>{{title}}</h1>
-<p>{{description}}</p>
-<p><strong>Date:</strong> {{date}}, {{time}}</p>
-{{/with}}
-<p><strong>Address:</strong> {{address}}</p>
-<p><strong>Author:</strong> {{event.author.email}}</p>
-<div id="map"></div>
+<div class="go-back">
+  <a href="/event">
+    <span class="icon-arrow-left"></span>
+    <p>Go back</p>  
+  </a>
+</div>
 
-{{#unless go}}
-  <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">I will go!!</a>
-{{/unless}}
+<div class="event row">
+  <div class="col-md-6 event-left">
+    <div class="event-header row">
+      <div class="col-md-2 event-header-date">
+        <p>{{event.date.[0]}}{{event.date.[1]}}<span>{{event.date.[3]}}{{event.date.[4]}}</span></p>
+      </div>
+      <div class="col-md-10 event-header-info">
+        <h1>{{event.title}}</h1>
+        <img src="{{event.author.imgPath}}" alt="{{event.author.fullName}}">
+        <div class="event-header-info-text">
+          <p>Hosted by: <span>{{event.author.fullName}}</span></p>
+        </div>
+      </div>
+    </div>
 
-{{#if canDelete}}
-  <a href="/event/edit/{{event.id}}" class="btn btn-primary">Edit</a>
-  <a href="/event/delete/{{event.id}}" class="btn btn-danger">Delete</a>
-{{/if}}
+    <hr>
 
-{{#if event.participants}}
-<h2>Participants:</h2>
-<ul>
-  {{#each event.participants}}
-    {{#if fullName}}
-      <li>{{fullName}}</li>
-    {{else}}
-      <li>Anonymous</li>
+    <div class="event-description">
+      <h2>Details</h2>
+      <p>{{event.description}}</p>
+    </div>
+
+    {{#if event.participants}}
+    <div class="event-atendees">
+      <h2>Atendees ({{event.participants.length}})</h2>
+      {{#each event.participants}}
+      <div class="event-atendees-item">
+        <img src="{{this.imgPath}}" alt="{{this.fullName}}">
+        <h3>{{this.fullName}}</h3>
+        {{#if isAuthor}}
+        <p>Organizer</p>
+        {{else}}
+        <p>Member</p>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
     {{/if}}
-  {{/each}}
-</ul>
-{{/if}}
+  </div>
+
+  <div class="col-md-6 event-right">
+    <div class="event-map">
+      <div class="event-map-date  d-flex align-items-center">
+        <span class="icon-clock"></span>
+        <p>{{event.date}} <span>{{event.time}}</span></p>
+      </div>
+      <div class="event-map-location d-flex align-items-center">
+        <span class="icon-location"></span>
+        <p>{{address}}</p>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    {{#unless go}}
+    <div class="event-attend">
+      <a href="/event/go/{{event.id}}/{{user.id}}" class="btn btn-primary">Attend event</a>
+    </div>
+    {{/unless}}
+    
+    {{#if isAuthor}}
+    <div class="event-edit d-flex">
+      <a href="/event/edit/{{event.id}}" class="btn btn-secondary">Edit</a>
+      <a href="/event/delete/{{event.id}}" class="btn btn-danger">Delete</a>
+    </div>
+    {{/if}}
+  </div>
+</div>

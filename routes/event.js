@@ -95,7 +95,9 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
     .populate("author")
     .populate("participants")
     .then(event => {
-      let canDelete = event.author.id === req.user.id;
+      let isAuthor = event.author.id === req.user.id;
+
+      event.date = event.date.split("-").reverse().join(" ");
 
       let go = false;
 
@@ -107,6 +109,7 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
         });
       }
 
+      console.log(go);
       googleMapsClient
         .reverseGeocode({
           latlng: [event.location.coordinates[0], event.location.coordinates[1]]
@@ -114,12 +117,14 @@ router.get("/:id", ensureLoggedIn("/event"), (req, res, next) => {
         .asPromise()
         .then(data => data.json.results[0].formatted_address)
         .then(address => {
+          //address = address.split(",").join(" - ");
+
           res.render("event/show", {
             event,
             location: JSON.stringify(event),
             address,
             go,
-            canDelete
+            isAuthor
           });
         })
         .catch(err => next(err));
