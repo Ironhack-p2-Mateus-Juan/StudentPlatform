@@ -18,7 +18,7 @@ mongoose.Promise = Promise;
 mongoose
   .connect(dbURL)
   .then(() => {
-    console.log("Connected to Awesome Project!");
+    console.log(`Connected to Mongo on ${dbURL}`);
   })
   .catch(err => {
     console.error("Error connecting to mongo", err);
