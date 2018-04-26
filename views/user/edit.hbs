@@ -1,69 +1,70 @@
 <div class="container-fluid">
   <h1 class="text-center">Edit your profile</h1>
   <div class="container">
-
     <form class="d-flex justify-content-center " action="/user/edit" method="post" enctype="multipart/form-data">
-      <div class=" col-md-6 p-3">
-        <div class="d-flex justify-content-between">
+      <div class="row w-100">
+        <div class=" col-md-8 p-3">
+          <div class="d-flex justify-content-between">
 
-          <div class="form-group col-md-7 p-0">
-            <label for="username">{{#if user.username}}{{user.username}}{{else}}New username{{/if}}</label>
-            <input type="text" maxlength="25" class="form-control" name="username" value="{{#if user.username}}{{user.username}}{{/if}}" placeholder="Username">
+            <div class="form-group col-md-7 p-0">
+              <label for="username">{{#if user.username}}{{user.username}}{{else}}New username{{/if}}</label>
+              <input type="text" maxlength="25" class="form-control" name="username" value="{{#if user.username}}{{user.username}}{{/if}}"
+                placeholder="Username">
+            </div>
+
+            <div class="form-group col-md-4 p-0">
+              <label for="bootcamp">Bootcamp</label>
+              <select name="bootcamp" id="bootcamp" class="form-control">
+                <option value="">Current: {{user.bootcamp}}</option>
+                <option value="Web">Web</option>
+                <option value="UX">UX</option>
+              </select>
+            </div>
           </div>
 
-          <div class="form-group col-md-4 p-0">
-            <label for="bootcamp">Bootcamp</label>
-            <select name="bootcamp" id="bootcamp" class="form-control">
-              <option value="">Current: {{user.bootcamp}}</option>
-              <option value="Web">Web</option>
-              <option value="UX">UX</option>
-            </select>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control" name="fullName" placeholder="Full Name" value="{{user.fullName}}">
           </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="{{user.email}}">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="New password">
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <a href="/user" class="btn btn-danger w-25">Cancel</a>
+            <button type="submit" class="btn btn-success w-25">Save</button>
+          </div>
+
         </div>
 
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" class="form-control" name="fullName" placeholder="Full Name" value="{{user.fullName}}">
-        </div>
+        <div class="d-flex flex-column align-items-center col-md-4 p-3">
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" value="{{user.email}}">
-        </div>
+          <div class="form-group">
+            {{#if user.imgPath }}
+            <figure class="figure profile-pic">
+              <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
+            </figure>
+            <a href="/user/remove-profile-pic/{{user.id}}" class="btn btn-danger btn-sm">Remove image</a>
+            {{else}}
+            <p>No image</p>
+            {{/if}}
+          </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="New password">
-        </div>
-
-        <div class="d-flex justify-content-between">
-          <a href="/user" class="btn btn-danger w-25">Cancel</a>
-          <button type="submit" class="btn btn-success w-25">Save</button>
+          <div class="form-group">
+            <label for="photo">Update profile image</label>
+            <input type="file" class="form-control-file" name="photo" id="photo">
+          </div>
+          
         </div>
 
       </div>
-
-      <div class="d-flex flex-column align-items-center col-md-4 p-3">
-
-        <div class="form-group">
-          {{#if user.imgPath }}
-          <figure class="figure profile-pic">
-            <img src="{{user.imgPath}}" class="figure-img img-fluid rounded" alt="{{user.fullName}}">
-          </figure>
-          <a href="/user/remove-profile-pic/{{user.id}}" class="btn btn-danger btn-sm">Remove image</a>
-          {{else}}
-          <p>No image</p>
-          {{/if}}
-        </div>
-
-        <div class="form-group">
-          <label for="photo">Update profile image</label>
-          <input type="file" class="form-control-file" name="photo" id="photo">
-        </div>
-        <textarea class="form-control" rows="5" name="description" placeholder="Tell us something about yourself..."></textarea>
-      </div>
-
     </form>
-
   </div>
 </div>
