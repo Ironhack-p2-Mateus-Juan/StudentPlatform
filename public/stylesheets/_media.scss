@@ -9,6 +9,14 @@
     }
   }
 
+  .container {
+    margin: 0;
+  }
+
+  .card {
+    margin: 0 auto;
+  }
+
   #login-btn-nav {
     display: flex;
     justify-content: center;
@@ -44,5 +52,26 @@
 
   .event-right {
     padding: 0 15px;
+  }
+
+  #post-content {
+    width: 90% !important;
+    h1 {
+      text-align: center;
+    }
+  }
+
+  .post-comment {
+    width: 90% !important;
+  }
+
+  #sign-up-form {
+    height: 550px !important;
+  }
+  #sign-up-form-container {
+    flex-direction: column;
+    .col-md-4 {
+      margin-bottom: 30px;
+    }
   }
 }

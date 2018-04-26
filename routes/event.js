@@ -9,6 +9,7 @@ const calendarInsert = require("../config/calendar");
 const calendarUpdate = require("../config/calendar-update");
 const calendarDelete = require("../config/calendar-delete");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
+const isActive = require("../middlewares/isActive");
 const uploadCloud = require("../config/cloudinary");
 const nodemailer = require("nodemailer");
 
@@ -29,14 +30,14 @@ router.get("/", (req, res, next) => {
 });
 
 // New event page
-router.get("/new", (req, res, next) => {
+router.get("/new", [ensureLoggedIn(), isActive()], (req, res, next) => {
   res.render("event/new");
 });
 
 // Save new event
 router.post(
   "/new",
-  [ensureLoggedIn("/event"), uploadCloud.single("image")],
+  [ensureLoggedIn("/event"), uploadCloud.single("image"), isActive()],
   (req, res, next) => {
     const { title, content, date, time, address } = req.body;
     const author = req.user.id;

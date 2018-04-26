@@ -7,3 +7,8 @@
 <p class="alert alert-light">
   <a href="/user/edit">Edit your profile</a>
 </p>
+
+{{#unless user.isActive}}
+<h2>You need to activate your account.</h2>
+<h3>Please, check your email</h3>
+{{/unless}}

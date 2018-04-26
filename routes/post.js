@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 const postRoute = express.Router();
 const ensureLoggedOut = require("../middlewares/ensureLoggedOut");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn");
+const isActive = require("../middlewares/isActive");
 const uploadCloud = require("../config/cloudinary");
 
 // Show all posts
@@ -20,7 +21,7 @@ postRoute.get("/", ensureLoggedIn(), (req, res, next) => {
 });
 
 // Create new post
-postRoute.get("/new", ensureLoggedIn(), (req, res, next) => {
+postRoute.get("/new", [ensureLoggedIn(), isActive()], (req, res, next) => {
  res.render("posts/new");
 });
 

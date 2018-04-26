@@ -66,23 +66,23 @@
   content: url("../images/icons/location.png"); }
 
 body {
-  font: 10px  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; }
+  font: 10px "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; }
 
 .container {
   max-width: 930px; }
 
 h1 {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: bold;
   font-size: 4.8em; }
 
 h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   font-size: 2.4em; }
 
 h5 {
-  font-family: 'Roboto-Regular', sans-serif;
+  font-family: "Roboto-Regular", sans-serif;
   font-size: 1.6em; }
 
 .btn-primary {
@@ -300,8 +300,17 @@ nav {
 .post-container {
   background-color: #ffffff; }
 
-#post-content {
-  white-space: pre-wrap; }
+#post-content p {
+  font-size: 16px; }
+
+.post-comment {
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  background: white; }
+
+.btn-comment {
+  display: inline-block; }
 
 /*************************************************************************/
 .section-title h1 {
@@ -330,8 +339,8 @@ nav {
   .card-top {
     height: 180px; }
     .card-top img {
-      /*       object-fit: cover; */
-      max-height: 158px;
+      object-fit: cover;
+      /* max-height: 158px; */
       max-width: 100%; }
   .card-author img {
     position: absolute;
@@ -477,6 +486,10 @@ nav {
       font-size: 1.2em;
       display: flex;
       height: 50px; }
+  .container {
+    margin: 0; }
+  .card {
+    margin: 0 auto; }
   #login-btn-nav {
     display: flex;
     justify-content: center; }
@@ -497,6 +510,18 @@ nav {
   .event-atendees-item {
     margin-bottom: 20px; }
   .event-right {
-    padding: 0 15px; } }
+    padding: 0 15px; }
+  #post-content {
+    width: 90% !important; }
+    #post-content h1 {
+      text-align: center; }
+  .post-comment {
+    width: 90% !important; }
+  #sign-up-form {
+    height: 550px !important; }
+  #sign-up-form-container {
+    flex-direction: column; }
+    #sign-up-form-container .col-md-4 {
+      margin-bottom: 30px; } }
 
 /*# sourceMappingURL=style.css.map */
