@@ -41,9 +41,20 @@ commentRoute.post("/add/:idPost", ensureLoggedIn(), (req, res, next) => {
 commentRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
   const { content } = req.body;
 
-  Comments.findByIdAndUpdate(req.params.id, { content })
-    .then(() => {
-      res.redirect("back");
+  Comments.findById(req.params.id)
+    .then(userComm => {
+      if (req.user.id == userComm.author) {
+        userComm
+          .update({ content })
+          .then(() => {
+            res.redirect("back");
+          })
+          .catch(err => {
+            res.render("error");
+          });
+      } else {
+        res.render("error");
+      }
     })
     .catch(err => {
       res.render("error");
@@ -52,24 +63,28 @@ commentRoute.post("/edit/:id", ensureLoggedIn(), (req, res, next) => {
 
 // Delete comment
 commentRoute.post("/delete/:id/:postId", ensureLoggedIn(), (req, res, next) => {
-  Comments.findByIdAndRemove(req.params.id)
-    .then(() => {
-      Post.findById(req.params.postId)
-        .then(post => {
-          console.log(post);
-          post.comments.splice(post.comments.indexOf(req.params.id, 1));
-          post
-            .save()
-            .then(() => {
-              res.redirect("back");
-            })
-            .catch(err => {
-              res.render("error");
-            });
-        })
-        .catch(err => {
-          res.render("error");
-        });
+  Comments.findById(req.params.id)
+    .then(userComm => {
+      if (req.user.id == userComm.author) {
+        userComm.remove({});
+        Post.findById(req.params.postId)
+          .then(post => {
+            post.comments.splice(post.comments.indexOf(req.params.id, 1));
+            post
+              .save()
+              .then(() => {
+                res.redirect("back");
+              })
+              .catch(err => {
+                res.render("error");
+              });
+          })
+          .catch(err => {
+            res.render("error");
+          });
+      } else {
+        res.render("error");
+      }
     })
     .catch(err => {
       res.render("error");
