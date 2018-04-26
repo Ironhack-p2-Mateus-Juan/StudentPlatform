@@ -44,8 +44,8 @@ router.post(
     const imagePath = req.file ? req.file.url : "";
     let lat, lng;
 
-    content.length > 200
-   ? (thumb = content.slice(0, 200) + "...")
+    content.length > 100
+   ? (thumb = content.slice(0, 100) + "...")
    : (thumb = content);
 
     googleMapsClient
