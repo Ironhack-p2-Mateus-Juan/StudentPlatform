@@ -90,8 +90,8 @@ hbs.registerHelper('isCommentAuthor', function(conditional, options) {
 
 
 app.locals.title = "Student Platform";
-app.locals.brand = "./images/logo.svg";
-app.locals.avatar = "./images/avatar.png";
+app.locals.brand = "https://ih-studentplatform.herokuapp.com/images/logo.svg";
+app.locals.avatar = "https://ih-studentplatform.herokuapp.com/images/avatar.png";
 
 const index = require("./routes/index");
 app.use("/", index);
